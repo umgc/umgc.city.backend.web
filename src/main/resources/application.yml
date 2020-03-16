@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: UMGC City Application
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: UMGCityHikariConnPool
+      connection-timeout: 20000
+      minimum-idle: 2
+      maximum-pool-size: 4
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    generate-ddl: false
+
+server:
+  port: 5000
+
+management:
+  health:
+    db:
+      enabled: true
+    ldap:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /order/invoice/
+      exposure:
+        include: health
