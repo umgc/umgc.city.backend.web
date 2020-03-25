@@ -19,8 +19,6 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-    properties.hibernate.temp.use_jdbc_metadata_defaults: false
-    generate-ddl: false
 
 server:
   port: 5000

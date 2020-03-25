@@ -13,7 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>team1</name>
     <description>UMGC City Team 1: Java Service</description>
-
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -25,16 +24,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
+            <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <version>9.1-901-1.jdbc4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -63,13 +58,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

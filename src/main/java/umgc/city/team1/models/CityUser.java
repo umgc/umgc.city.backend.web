@@ -10,8 +10,6 @@ import java.util.UUID;
 
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "city_user")
 public class CityUser {
@@ -32,5 +30,14 @@ public class CityUser {
 
     @Column(name="last_name")
     private String lastName;
+
+    public CityUser(String firstName, String lastName, String emailAddress, String password){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
+
 
 }
