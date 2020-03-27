@@ -1,10 +1,9 @@
 package umgc.city.team1.utilities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import umgc.city.team1.models.EmailInfo;
 
-@Service
-public class EmailService {
-    private final Logger logger = LoggerFactory.getLogger(EmailService.class);
+public interface EmailService {
+    boolean sendEmail(EmailInfo emailInfo);
+
+    boolean sendEmail(String senderEmail, String recipientEmail, String subject, String body);
 }
