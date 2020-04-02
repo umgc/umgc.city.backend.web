@@ -34,7 +34,7 @@ public class PermitType implements Serializable {
     @JoinColumn(name= "allowed_land_use_id")
     private AllowedLandUse allowedLandUse;
 
-    @OneToMany(mappedBy = "permit_type", cascade = CascadeType.ALL)
-    private Set<Application> applications;
+    @OneToMany(mappedBy = "permitType", cascade = CascadeType.ALL)
+    private Set<Application> application;
 }
 

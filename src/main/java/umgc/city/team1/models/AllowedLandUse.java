@@ -25,12 +25,12 @@ public class AllowedLandUse implements Serializable {
     @JoinColumn(name = "zone_id")
     private Zone zone;
 
-    @ManyToOne
-    @JoinColumn(name= "zone_land_use_id")
-    private ZoneLandUse zoneLaneUse;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "zone_land_use_id", nullable = false)
+    private ZoneLandUse zoneLandUse;
 
-    @OneToMany(mappedBy = "allowed_land_use", cascade = CascadeType.ALL)
-    private Set<PermitType> permitTypes;
+    @OneToMany(mappedBy = "allowedLandUse", cascade = CascadeType.ALL)
+    private Set<PermitType> permitType;
 
 
 }

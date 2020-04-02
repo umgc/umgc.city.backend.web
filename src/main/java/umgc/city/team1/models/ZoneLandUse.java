@@ -26,12 +26,14 @@ public class ZoneLandUse implements Serializable {
     private City city;
 
     @Column(name = "land_use_name")
-    private String land_use_name;
+    private String landUseName;
 
     @Column(name="description")
     private String description;
 
-    @OneToMany(mappedBy = "zoneLandUse", cascade = CascadeType.ALL)
-    private Set<AllowedLandUse> allowedLandUse;
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "zoneLandUse")
+    private AllowedLandUse allowedLandUse;
 
 }
