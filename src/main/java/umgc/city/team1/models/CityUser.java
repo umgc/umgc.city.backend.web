@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "city_user")
-public class CityUser {
+public class CityUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +32,11 @@ public class CityUser {
 
     @Column(name="last_name")
     private String lastName;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "cityUser")
+    private City city;
 
     public CityUser(String firstName, String lastName, String emailAddress, String password){
         this.firstName = firstName;

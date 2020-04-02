@@ -17,7 +17,7 @@ spring:
       ddl-auto: none
     show-sql: true
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     open-in-view: false
 
 server:

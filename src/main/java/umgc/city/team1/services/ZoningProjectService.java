@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import umgc.city.team1.models.City;
 import umgc.city.team1.models.CityUser;
+import umgc.city.team1.models.incoming.UseCase;
 import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.repositories.CityRepository;
 import umgc.city.team1.repositories.CityUserRepository;
@@ -20,5 +21,10 @@ public class ZoningProjectService {
     public void createUserAccount(UserAccount userAccount){
         cityRepository.save(new City(userAccount.getCity(), userAccount.getState(),cityUserRepository.save(new CityUser(userAccount.getFirstName(), userAccount.getLastName(),
                 userAccount.getEmail(), userAccount.getPassword()))));
+    }
+
+    public void createUseCase(UseCase useCase){
+
+
     }
 }
