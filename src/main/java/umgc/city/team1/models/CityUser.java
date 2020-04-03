@@ -38,6 +38,11 @@ public class CityUser implements Serializable {
             mappedBy = "cityUser")
     private City city;
 
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "cityUser")
+    private Authorities authorities;
+
     public CityUser(String firstName, String lastName, String emailAddress, String password){
         this.firstName = firstName;
         this.lastName = lastName;

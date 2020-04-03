@@ -34,7 +34,7 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createUserAccount(@RequestBody UseCase useCase) {
+    public ResponseEntity createUseCase(@RequestBody UseCase useCase) {
         zoningProjectService.createUseCase(useCase);
         return ResponseEntity.ok("Use Case Successfully Created");
     }

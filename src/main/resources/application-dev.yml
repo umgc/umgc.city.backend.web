@@ -4,6 +4,6 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/UMGCity?currentSchema=public
     username: postgres
-    password: Knplep62786!
+    password: postgres
 
 

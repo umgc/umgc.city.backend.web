@@ -21,7 +21,7 @@ public class DevelopmentStandards implements Serializable {
     private UUID id;
 
     @Column(name = "general_standards_url")
-    private String generalGtandardsURL;
+    private String generalStandardsURL;
 
     @Column(name="additional_standards_url")
     private String additionalStandardsURL;

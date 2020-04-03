@@ -19,8 +19,9 @@ public class Authorities {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "email_address")
-    private String emailAddress;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_user_id", nullable = false)
+    private CityUser cityUser;
 
     @Column(name="authority")
     private String authority;
