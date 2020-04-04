@@ -68,7 +68,7 @@ CREATE TABLE public.zone_land_use
     id uuid DEFAULT uuid_generate_v4 (),
     city_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE,
     land_use_name character varying(100) NOT NULL,
-    description TEXT NOT NULL,
+    description TEXT,
     CONSTRAINT zone_land_use_id PRIMARY KEY (id)
 );
 
@@ -79,8 +79,8 @@ CREATE TABLE public.zone
 (
     id uuid DEFAULT uuid_generate_v4(),
     city_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	zone_symbol character varying(10) NOT NULL,
-	description TEXT NOT NULL,
+	zone_symbol character varying(20) NOT NULL,
+	description TEXT,
     CONSTRAINT zone_id PRIMARY KEY (id)
 );
 
@@ -102,10 +102,10 @@ CREATE TABLE public.development_standards
 (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
 	zone_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES zone(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    general_standards_url character varying(100) NOT NULL,
-    additional_standards_url character varying(100) NOT NULL,
-    garden_standards_url character varying(100) NOT NULL,
-    frontage_and_facades_standards_url character varying(100) NOT NULL,
+    general_standards_url TEXT,
+    additional_standards_url TEXT,
+    garden_standards_url TEXT,
+    frontage_and_facades_standards_url TEXT,
     CONSTRAINT development_standards_id PRIMARY KEY (id)
 );
 
@@ -116,9 +116,9 @@ CREATE TABLE public.permit_type
 (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
 	allowed_land_use_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES allowed_land_use(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    description TEXT NOT NULL,
-    procedure_url character varying(100) NOT NULL,
-    name character varying(100),
+    description TEXT,
+    procedure_url TEXT,
+    name character varying(100) NOT NULL,
     CONSTRAINT permit_type_id PRIMARY KEY (id)
 );
 
@@ -129,7 +129,7 @@ CREATE TABLE public.application
 (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
 	permit_type_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES permit_type(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    application_url character varying(100) NOT NULL,
+    application_url TEXT,
     name character varying(50) NOT NULL,
     CONSTRAINT application_id PRIMARY KEY (id)
 );
