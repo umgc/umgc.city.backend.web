@@ -6,5 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
+
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
 }
