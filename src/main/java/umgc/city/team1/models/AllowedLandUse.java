@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class AllowedLandUse implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "zone_id")
     private Zone zone;

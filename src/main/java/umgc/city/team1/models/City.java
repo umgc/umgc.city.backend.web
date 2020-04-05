@@ -1,8 +1,10 @@
 package umgc.city.team1.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
@@ -17,9 +19,13 @@ public class City implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
+    @NotNull
+    @Length(max = 50)
     @Column(name="name")
     private String name;
 
+    @NotNull
+    @Length(max = 50)
     @Column(name="state")
     private String state;
 

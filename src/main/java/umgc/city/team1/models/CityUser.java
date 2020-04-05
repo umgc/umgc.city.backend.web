@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -21,15 +24,21 @@ public class CityUser implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
+    @NotEmpty
+    @Length(max = 30)
     @Column(name = "password")
     private String password;
 
+    @Email
+    @Length(max = 100)
     @Column(name = "email_address")
     private String emailAddress;
 
+    @Length(max = 50)
     @Column(name="first_name")
     private String firstName;
 
+    @Length(max = 50)
     @Column(name="last_name")
     private String lastName;
 
