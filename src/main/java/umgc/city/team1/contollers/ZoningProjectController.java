@@ -17,6 +17,7 @@ import java.util.UUID;
 @RequestMapping("/city-zoning-project-management")
 public class ZoningProjectController {
 
+<<<<<<< Updated upstream
 private ZoningProjectService zoningProjectService;
 private ZoneLandUseRepository zoneLandUseRepository;
 
@@ -57,6 +58,39 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
         }
     }
 
+    /*
+        // "Password must have 6 characters and 1 number.
+    private Boolean passwordCheck(String password) {
+        return password.length() >= 7 && hasOneDigit(password) && hasNCharacter(password)? true:false;
+    }
+
+    // Password has on digit
+    private boolean hasOneDigit(String password) {
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Password has n characters
+    private boolean hasNCharacter(String password) {
+        int charactersCount = 6;
+        int count = 0;
+        for (char c : password.toCharArray()) {
+            if (Character.isLetter(c)) {
+                count++;
+            }
+        }
+        return (count >= charactersCount) ? true:false;
+    }
+
+
+
+
+     */
+
 //    @PutMapping(value = "/usecase/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
 //    MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity editUseCase(@RequestBody UseCase useCase) {
@@ -91,4 +125,12 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 //            public ResponseEntity getAuthorization(@RequestBody UserAccount userAccount) {
 //            return ResponseEntity.ok(zoningProjectService.getAuthorization(userAccount));
 //            }
+=======
+    private ZoningProjectService zoningProjectService;
+
+    public ZoningProjectController(ZoningProjectService zoningProjectService) {
+        this.zoningProjectService = zoningProjectService;
+
+    }
+>>>>>>> Stashed changes
 }

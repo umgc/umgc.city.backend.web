@@ -33,6 +33,7 @@ public class CityUser implements Serializable {
     @Column(name="last_name")
     private String lastName;
 
+<<<<<<< Updated upstream
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "cityUser")
@@ -51,5 +52,8 @@ public class CityUser implements Serializable {
     }
 
 
+=======
+    private Boolean enabled;
+>>>>>>> Stashed changes
 
 }
