@@ -1,4 +1,4 @@
-package umgc.city.team1.contollers;
+package umgc.city.team1.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
