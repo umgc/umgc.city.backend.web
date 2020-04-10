@@ -17,7 +17,6 @@ import java.util.UUID;
 @RequestMapping("/city-zoning-project-management")
 public class ZoningProjectController {
 
-<<<<<<< Updated upstream
 private ZoningProjectService zoningProjectService;
 private ZoneLandUseRepository zoneLandUseRepository;
 
@@ -125,12 +124,4 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 //            public ResponseEntity getAuthorization(@RequestBody UserAccount userAccount) {
 //            return ResponseEntity.ok(zoningProjectService.getAuthorization(userAccount));
 //            }
-=======
-    private ZoningProjectService zoningProjectService;
-
-    public ZoningProjectController(ZoningProjectService zoningProjectService) {
-        this.zoningProjectService = zoningProjectService;
-
-    }
->>>>>>> Stashed changes
 }
