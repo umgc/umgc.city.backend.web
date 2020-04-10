@@ -3,8 +3,11 @@ package umgc.city.team1.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
@@ -12,19 +15,23 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "application")
-public class Application {
+public class Application implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "permit_id", columnDefinition = "uuid")
-    private UUID permitId;
-
+    @NotNull
+    @Length(max = 50)
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name = "application_url")
     private String applicationURL;
+
+    @ManyToOne
+    @JoinColumn(name= "permit_type_id")
+    private PermitType permitType;
 }

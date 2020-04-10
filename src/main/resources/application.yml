@@ -14,13 +14,12 @@ spring:
       max-lifetime: 1200000
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     open-in-view: false
-    properties.hibernate.temp.use_jdbc_metadata_defaults: false
-    generate-ddl: false
+  h2:
 
 server:
   port: 5000
