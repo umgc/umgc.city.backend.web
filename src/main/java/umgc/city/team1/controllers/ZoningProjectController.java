@@ -1,15 +1,15 @@
-package umgc.city.team1.contollers;
+package umgc.city.team1.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import umgc.city.team1.models.incoming.UseCase;
+import umgc.city.team1.models.Zone;
 import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.repositories.ZoneLandUseRepository;
 import umgc.city.team1.services.ZoningProjectService;
 
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = "*")
@@ -17,7 +17,6 @@ import java.util.UUID;
 @RequestMapping("/city-zoning-project-management")
 public class ZoningProjectController {
 
-<<<<<<< Updated upstream
 private ZoningProjectService zoningProjectService;
 private ZoneLandUseRepository zoneLandUseRepository;
 
@@ -33,20 +32,15 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
     return ResponseEntity.ok("User Successfully Created");
     }
 
-    @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
-            MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createUseCase(@RequestBody UseCase useCase) {
-        zoningProjectService.createUseCase(useCase);
-        return ResponseEntity.ok("Use Case Successfully Created");
+    @GetMapping(value = "/cities/{id}/zones", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Zone> getZonesByCity(@PathVariable("id") UUID cityId){
+        return this.zoningProjectService.getZonesByCityId(cityId);
     }
 
-//    @PostMapping(value = "/cities/{id}/usecases/upload", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
-//            "text/csv")
-//    public ResponseEntity handleCaseFileUpload(@RequestParam("file") MultipartFile file,
-//                                               @PathVariable("id") UUID cityId) {
-//        zoningProjectService.handleCaseFileUpload(file, cityId);
-//        return ResponseEntity.ok("Data File Successfully Processed");
-//    }
+    @GetMapping(value = "/cities/zones/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Zone getZoneById(@PathVariable("id") UUID zoneId){
+        return this.zoningProjectService.getZonesById(zoneId);
+    }
 
     @DeleteMapping(value = "/usecases/{id}")
     public ResponseEntity<HttpStatus> deleteUseCases(@PathVariable("id") UUID id) {
@@ -58,44 +52,28 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
         }
     }
 
-    /*
-        // "Password must have 6 characters and 1 number.
-    private Boolean passwordCheck(String password) {
-        return password.length() >= 7 && hasOneDigit(password) && hasNCharacter(password)? true:false;
-    }
-
-    // Password has on digit
-    private boolean hasOneDigit(String password) {
-        for (char c : password.toCharArray()) {
-            if (Character.isDigit(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Password has n characters
-    private boolean hasNCharacter(String password) {
-        int charactersCount = 6;
-        int count = 0;
-        for (char c : password.toCharArray()) {
-            if (Character.isLetter(c)) {
-                count++;
-            }
-        }
-        return (count >= charactersCount) ? true:false;
-    }
+//    @PostMapping(value = "/cities/{id}/usecases/upload", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+//            "text/csv")
+//    public ResponseEntity handleCaseFileUpload(@RequestParam("file") MultipartFile file,
+//                                               @PathVariable("id") UUID cityId) {
+//        zoningProjectService.handleCaseFileUpload(file, cityId);
+//        return ResponseEntity.ok("Data File Successfully Processed");
+//    }
 
 
-
-
-     */
 
 //    @PutMapping(value = "/usecase/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
 //    MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity editUseCase(@RequestBody UseCase useCase) {
 //        zoningProjectService.editUseCase(useCase);
 //        return ResponseEntity.ok("Use Case Successfully Edited");
+//    }
+
+//    @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+//            MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity createUseCase(@RequestBody UseCase useCase) {
+//        zoningProjectService.createUseCase(useCase);
+//        return ResponseEntity.ok("Use Case Successfully Created");
 //    }
 
 //    @GetMapping(value = "/cities/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -125,12 +103,5 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 //            public ResponseEntity getAuthorization(@RequestBody UserAccount userAccount) {
 //            return ResponseEntity.ok(zoningProjectService.getAuthorization(userAccount));
 //            }
-=======
-    private ZoningProjectService zoningProjectService;
 
-    public ZoningProjectController(ZoningProjectService zoningProjectService) {
-        this.zoningProjectService = zoningProjectService;
-
-    }
->>>>>>> Stashed changes
 }

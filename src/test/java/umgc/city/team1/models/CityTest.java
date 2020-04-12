@@ -1,15 +1,28 @@
 package umgc.city.team1.models;
 
-import org.junit.jupiter.api.Test;
 
+import lombok.Data;
+import org.junit.Before;
+import org.junit.Test;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+@Data
 class CityTest {
+
+    private CityUser cityUser;
+
+    @Before
+    public void createCityUser(){
+        cityUser = new CityUser("John", "Doe", "umucCityTest@gamil.com", "test_password");
+        cityUser.setId(UUID.randomUUID());
+    }
+
     @Test
     public void testCitySetAndGetId() {
-        City city = new City();
+        City city = new City("Pasadena", "FL", cityUser);
         UUID uuid = UUID.randomUUID();
         try {
             city.setId(uuid);
@@ -21,8 +34,8 @@ class CityTest {
 
     @Test
     public void testCitySetAndGetName() {
-        City city = new City();
-        String cityName = "City of ...";
+        City city = new City("Pasadena", "FL", cityUser);
+        String cityName = "City of Pasadena";
         try {
             city.setName(cityName);
             assertEquals(city.getName(),cityName);
@@ -33,8 +46,8 @@ class CityTest {
 
     @Test
     public void testCitySetAndGetState() {
-        City city = new City();
-        String stateName = "State of ...";
+        City city = new City("Pasadena", "FL", cityUser);
+        String stateName = "MD";
         try {
             city.setState(stateName);
             assertEquals(city.getState(),stateName);
