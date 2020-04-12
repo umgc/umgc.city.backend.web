@@ -5,28 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "application")
-public class Application implements Serializable {
+@Table(name = "authorities")
+public class Authorities {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "name")
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_user_id", nullable = false)
+    private CityUser cityUser;
 
-    @Column(name = "application_url")
-    private String applicationURL;
-
-    @ManyToOne
-    @JoinColumn(name= "permit_type_id")
-    private PermitType permitType;
+    @Column(name="authority")
+    private String authority;
 }

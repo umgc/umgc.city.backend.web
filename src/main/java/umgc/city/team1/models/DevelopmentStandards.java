@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
@@ -12,18 +13,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "development_standards")
-public class DevelopmentStandards {
+public class DevelopmentStandards implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "zone_id", columnDefinition = "uuid")
-    private UUID zoneId;
-
     @Column(name = "general_standards_url")
-    private String generalGtandardsURL;
+    private String generalStandardsURL;
 
     @Column(name="additional_standards_url")
     private String additionalStandardsURL;
@@ -33,5 +31,9 @@ public class DevelopmentStandards {
 
     @Column(name="frontage_and_facades_standards_url")
     private String frontageAndFacadesStandardsURL;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "zone_id", nullable = false)
+    private Zone zone;
 
 }
