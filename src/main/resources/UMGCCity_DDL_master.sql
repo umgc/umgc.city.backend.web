@@ -60,13 +60,10 @@ ALTER TABLE public.city
 
 CREATE TABLE public.authorities
 (
-    email_address character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    authority character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT fk_authorities_users FOREIGN KEY (email_address)
-        REFERENCES public.city_user (email_address) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    city_user_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    authority character varying(50) COLLATE pg_catalog."default" NOT NULL
+);
 
 TABLESPACE pg_default;
 
