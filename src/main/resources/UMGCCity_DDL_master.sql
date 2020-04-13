@@ -17,9 +17,6 @@ DROP TABLE IF EXISTS zone_land_use  CASCADE;
 DROP TABLE IF EXISTS zone CASCADE;
 DROP TABLE IF EXISTS development_standards CASCADE;
 DROP TABLE IF EXISTS allowed_land_use CASCADE;
-DROP TABLE IF EXISTS permit_type CASCADE;
-DROP TABLE IF EXISTS application CASCADE;
-
 
 CREATE SCHEMA public
     AUTHORIZATION postgres;
@@ -30,70 +27,108 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 CREATE TABLE public.city_user
 (
-    id uuid DEFAULT uuid_generate_v4 (),
-    password character varying(30) NOT NULL,
-    last_name character varying(50),
-    first_name character varying(50),
-    email_address character varying(100) NOT NULL,
-	CONSTRAINT city_user_id PRIMARY KEY (id)
-);
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    email_address character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT city_user_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.city_user
     OWNER to postgres;
 	
 CREATE TABLE public.city
 (
-    id uuid DEFAULT uuid_generate_v4 (),
-    city_user_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    name character varying(50) NOT NULL,
-    state character varying(50) NOT NULL,
-    CONSTRAINT city_id PRIMARY KEY (id)
-);
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    city_user_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    state character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT city_id PRIMARY KEY (id),
+    CONSTRAINT city_city_user_id_fkey FOREIGN KEY (city_user_id)
+        REFERENCES public.city_user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.city
     OWNER to postgres;
 
 CREATE TABLE public.authorities
 (
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    city_user_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    authority character varying(50) COLLATE pg_catalog."default" NOT NULL
-);
+    email_address character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    authority character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT fk_authorities_users FOREIGN KEY (email_address)
+        REFERENCES public.city_user (email_address) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.authorities
     OWNER to postgres;
 
 CREATE TABLE public.zone_land_use
 (
-    id uuid DEFAULT uuid_generate_v4 (),
-    city_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    land_use_name character varying(100) NOT NULL,
-    description TEXT,
-    CONSTRAINT zone_land_use_id PRIMARY KEY (id)
-);
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    city_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    description character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT zone_land_use_id PRIMARY KEY (id),
+    CONSTRAINT zone_land_use_city_id_fkey FOREIGN KEY (city_id)
+        REFERENCES public.city (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.zone_land_use
     OWNER to postgres;
 
 CREATE TABLE public.zone
 (
-    id uuid DEFAULT uuid_generate_v4(),
-    city_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	zone_symbol character varying(20) NOT NULL,
-	description TEXT,
-    CONSTRAINT zone_id PRIMARY KEY (id)
-);
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    city_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    zone_symbol character varying(25) COLLATE pg_catalog."default" NOT NULL,
+    description character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT zone_id PRIMARY KEY (id),
+    CONSTRAINT zone_city_id_fkey FOREIGN KEY (city_id)
+        REFERENCES public.city (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.zone
     OWNER to postgres;	
 
 CREATE TABLE public.allowed_land_use
 (
-    id uuid DEFAULT uuid_generate_v4(),
-    zone_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES zone(id),
-    zone_land_use_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES zone_land_use(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT allowed_land_use_id PRIMARY KEY (id)
- );
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    zone_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    zone_land_use_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    permit_name character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    permit_description character varying(500) COLLATE pg_catalog."default" NOT NULL,
+    procedure_url character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    application_url character varying(250) COLLATE pg_catalog."default",
+    CONSTRAINT allowed_land_use_id PRIMARY KEY (id),
+    CONSTRAINT allowed_land_use_zone_id_fkey FOREIGN KEY (zone_id)
+        REFERENCES public.zone (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT allowed_land_use_zone_land_use_id_fkey FOREIGN KEY (zone_land_use_id)
+        REFERENCES public.zone_land_use (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.allowed_land_use
     OWNER to postgres;
@@ -101,42 +136,19 @@ ALTER TABLE public.allowed_land_use
 CREATE TABLE public.development_standards
 (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
-	zone_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES zone(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    general_standards_url TEXT,
-    additional_standards_url TEXT,
-    garden_standards_url TEXT,
-    frontage_and_facades_standards_url TEXT,
-    CONSTRAINT development_standards_id PRIMARY KEY (id)
-);
+    zone_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    general_standard_url character varying(200) COLLATE pg_catalog."default" NOT NULL,
+    additional_standard_url character varying(200) COLLATE pg_catalog."default",
+    garden_standard_url character varying(200) COLLATE pg_catalog."default",
+    frontage_and_facades_standards_url character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT development_standards_id PRIMARY KEY (id),
+    CONSTRAINT development_standards_zone_id_fkey FOREIGN KEY (zone_id)
+        REFERENCES public.zone (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
 
 ALTER TABLE public.development_standards
-    OWNER to postgres;
-	
-CREATE TABLE public.permit_type
-(
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-	allowed_land_use_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES allowed_land_use(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    description TEXT,
-    procedure_url TEXT,
-    name character varying(100) NOT NULL,
-    CONSTRAINT permit_type_id PRIMARY KEY (id)
-);
-
-ALTER TABLE public.permit_type
-    OWNER to postgres;
-	
-CREATE TABLE public.application
-(
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-	permit_type_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES permit_type(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    application_url TEXT,
-    name character varying(50) NOT NULL,
-    CONSTRAINT application_id PRIMARY KEY (id)
-);
-
-ALTER TABLE public.application
-    OWNER to postgres;
-
-
-
-
+	OWNER to postgres;
