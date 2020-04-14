@@ -39,4 +39,6 @@ public class City implements Serializable {
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private Set<Zone> zones;
 
+    public City() {
+    }
 }
