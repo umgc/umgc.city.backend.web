@@ -1,13 +1,18 @@
 package umgc.city.team1.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import umgc.city.team1.models.AllowedLandUse;
 import umgc.city.team1.models.Zone;
+import umgc.city.team1.models.incoming.UseCaseDto;
 import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.repositories.ZoneLandUseRepository;
 import umgc.city.team1.services.ZoningProjectService;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -42,6 +47,16 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
         return this.zoningProjectService.getZonesById(zoneId);
     }
 
+    @GetMapping(value = "/cities/zones/{id}/allowedlanduses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<AllowedLandUse> getAllowedLandUsesByZoneId(@PathVariable("id") UUID zoneId, Pageable pageable){
+        return this.zoningProjectService.getAllowedLandUsesByZoneId(zoneId, pageable);
+    }
+
+    @GetMapping(value = "/cities/zones/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UseCaseDto> getUseCasesByZoneId(@PathVariable("id") UUID zoneId){
+    return this.zoningProjectService.getUseCaseDto(zoneId);
+    }
+
     @DeleteMapping(value = "/usecases/{id}")
     public ResponseEntity<HttpStatus> deleteUseCases(@PathVariable("id") UUID id) {
         try {
@@ -51,15 +66,6 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-
-//    @PostMapping(value = "/cities/{id}/usecases/upload", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
-//            "text/csv")
-//    public ResponseEntity handleCaseFileUpload(@RequestParam("file") MultipartFile file,
-//                                               @PathVariable("id") UUID cityId) {
-//        zoningProjectService.handleCaseFileUpload(file, cityId);
-//        return ResponseEntity.ok("Data File Successfully Processed");
-//    }
-
 
 
 //    @PutMapping(value = "/usecase/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
@@ -81,11 +87,6 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 //        return ResponseEntity.ok(zoningProjectService.getUseCaseByCity(id));
 //    }
 //
-//    @GetMapping(value = "/cities/{city_id}/usecases/{case_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity getUseCasesByCityAndCaseId(@PathVariable("city_id") UUID cityId,
-//                                                     @PathVariable("case_id") UUID caseId) {
-//        return ResponseEntity.ok(zoningProjectService.getUseCaseByCityandCaseId(cityId, caseId));
-//    }
 //
 //    @GetMapping(value = "/users/emailaddress", produces =
 //            MediaType.APPLICATION_JSON_VALUE)
@@ -99,9 +100,4 @@ public ZoningProjectController(ZoningProjectService zoningProjectService, ZoneLa
 //        return ResponseEntity.ok("Email sent");
 //    }
 //
-//    @GetMapping(value = "users", produces = MediaType.APPLICATION_JSON_VALUE)
-//            public ResponseEntity getAuthorization(@RequestBody UserAccount userAccount) {
-//            return ResponseEntity.ok(zoningProjectService.getAuthorization(userAccount));
-//            }
-
 }

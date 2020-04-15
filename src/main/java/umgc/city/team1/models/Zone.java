@@ -1,18 +1,20 @@
 package umgc.city.team1.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "zone")
 public class Zone implements Serializable {
@@ -22,22 +24,25 @@ public class Zone implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
-
     @Column(name = "zone_symbol")
+    @NotNull
     private String zoneSymbol;
 
-    @Column(name= "description")
+    @Column(name = "description")
+    @NotNull
     private String description;
 
-    @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL)
-    private Set<AllowedLandUse> allowedLandUse;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private City city;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "zone")
-    private DevelopmentStandards developmentStandards;
+    public Zone(UUID id, String zoneSymbol, String description, City city){
+        this.id = id;
+        this.zoneSymbol = zoneSymbol;
+        this.description = description;
+        this.city = city;
+    }
 
 }

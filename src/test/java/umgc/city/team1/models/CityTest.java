@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.UUID;
 
+import static java.util.UUID.fromString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -16,7 +17,7 @@ class CityTest {
 
     @Before
     public void createCityUser(){
-        cityUser = new CityUser("John", "Doe", "umucCityTest@gamil.com", "test_password");
+        cityUser = new CityUser("John", "Doe", "umucCityTest@gamil.com", "test_password", fromString("8f64a3b3-39f4-4ed0-8002-7e4273d45f34") );
         cityUser.setId(UUID.randomUUID());
     }
 

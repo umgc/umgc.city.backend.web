@@ -2,7 +2,7 @@ spring:
   application:
     name: UMGC City Application
   profiles:
-    active: dev
+    active: prod
   datasource:
     driver-class-name: org.postgresql.Driver
     hikari:
@@ -13,28 +13,20 @@ spring:
       idle-timeout: 300000
       max-lifetime: 1200000
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
-    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+
   h2:
+    console:
+      path: /h2-console
+      enabled: true
 
 server:
   port: 5000
 
-management:
-  health:
-    db:
-      enabled: true
-    ldap:
-      enabled: false
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      base-path: /order/invoice/
-      exposure:
-        include: health

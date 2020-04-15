@@ -1,15 +1,18 @@
 package umgc.city.team1.models;
-import lombok.AllArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "allowed_land_use")
 public class AllowedLandUse implements Serializable {
@@ -19,25 +22,43 @@ public class AllowedLandUse implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "zone_id")
-    private Zone zone;
-
     @Column(name = "permit_name")
+    @NotNull
     private String permitName;
 
     @Column(name ="permit_description")
+    @NotNull
     private String permitDescription;
 
     @Column(name = "procedure_url")
+    @NotNull
     private String procedureUrl;
 
     @Column(name = "application_url")
+    @NotNull
     private String applicationUrl;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "zone_land_use_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "zone_land_use_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private ZoneLandUse zoneLandUse;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "zone_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Zone zone;
+
+    public AllowedLandUse(String permitName, String permitDescription, String procedureUrl, String applicationUrl,
+                          ZoneLandUse zoneLandUse, Zone zone){
+        this.permitName = permitName;
+        this.permitDescription = permitDescription;
+        this.procedureUrl = procedureUrl;
+        this.applicationUrl = applicationUrl;
+        this.zoneLandUse = zoneLandUse;
+        this.zone = zone;
+    }
 
 
 }

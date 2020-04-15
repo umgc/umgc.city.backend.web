@@ -1,12 +1,16 @@
 package umgc.city.team1.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "city")
@@ -17,14 +21,17 @@ public class City implements Serializable {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
+    @NotNull
     @Column(name="name")
     private String name;
 
+    @NotNull
     @Column(name="state")
     private String state;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_user_id", nullable = false)
+    @JoinColumn(name = "city_user_id", referencedColumnName = "id")
+    @JsonIgnore
     private CityUser cityUser;
 
     public City(String name, String state, CityUser cityUser){
@@ -32,11 +39,4 @@ public class City implements Serializable {
         this.state = state;
         this.cityUser = cityUser;
     }
-
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private Set<ZoneLandUse> zoneLanduses;
-
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private Set<Zone> zones;
-
 }

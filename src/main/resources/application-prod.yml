@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: prod
+  datasource:
+    url: jdbc:postgresql://ec2-34-233-186-251.compute-1.amazonaws.com:5432/d7k6t3v8s4kara
+    username: gqnniclxckaqhl
+    password: 53e227ff1881dee063604df246821cff2483214eade8e16d75a618b1e6ccaeb9
+    driver-class-name: org.postgresql.Driver
