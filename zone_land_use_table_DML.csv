@@ -1,0 +1,324 @@
+city_id,description
+2092098e-dae8-4b19-9899-8c83325352d8,Accessory dwelling unit
+2092098e-dae8-4b19-9899-8c83325352d8,Home occupations
+2092098e-dae8-4b19-9899-8c83325352d8,Residential accessory uses and structures
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,Single-family housing
+2092098e-dae8-4b19-9899-8c83325352d8,Cultural institutions
+2092098e-dae8-4b19-9899-8c83325352d8,Park and recreation facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Religious facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Religious facilities with columbarium
+2092098e-dae8-4b19-9899-8c83325352d8,Religious facilities with temporary homeless shelter
+2092098e-dae8-4b19-9899-8c83325352d8,Street fairs
+2092098e-dae8-4b19-9899-8c83325352d8,Tents
+2092098e-dae8-4b19-9899-8c83325352d8,Retail Sales: Personal property sales
+2092098e-dae8-4b19-9899-8c83325352d8,Retail Sales: Temporary uses
+2092098e-dae8-4b19-9899-8c83325352d8,"Adult day care, general"
+2092098e-dae8-4b19-9899-8c83325352d8,"Adult day care, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,"Filming, long-term"
+2092098e-dae8-4b19-9899-8c83325352d8,Child day-care centers
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day care, large, 9 to 14 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day care, small, 1 to 8 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Filming, short-term"
+2092098e-dae8-4b19-9899-8c83325352d8,Neighborhood garden
+2092098e-dae8-4b19-9899-8c83325352d8,Public safety facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial growing area
+2092098e-dae8-4b19-9899-8c83325352d8,"Utility, major"
+2092098e-dae8-4b19-9899-8c83325352d8,"Utility, minor"
+2092098e-dae8-4b19-9899-8c83325352d8,Multi-family housing
+2092098e-dae8-4b19-9899-8c83325352d8,Transitional housing
+2092098e-dae8-4b19-9899-8c83325352d8,Schools - Public and private
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care, general"
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Administrative business professional
+2092098e-dae8-4b19-9899-8c83325352d8,Lodging - Bed and breakfast inns
+2092098e-dae8-4b19-9899-8c83325352d8,Boarding houses
+2092098e-dae8-4b19-9899-8c83325352d8,Dormitories
+2092098e-dae8-4b19-9899-8c83325352d8,"Fraternities, sororities"
+2092098e-dae8-4b19-9899-8c83325352d8,Medical services - Extended care
+2092098e-dae8-4b19-9899-8c83325352d8,"Clubs, lodges, private meeting halls"
+2092098e-dae8-4b19-9899-8c83325352d8,Caretakers quarters
+2092098e-dae8-4b19-9899-8c83325352d8,Mixed-use projects
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care facilities, general"
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care facilities, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,Supportive housing
+2092098e-dae8-4b19-9899-8c83325352d8,Colleges - Nontraditional campus setting
+2092098e-dae8-4b19-9899-8c83325352d8,Colleges - Traditional campus setting
+2092098e-dae8-4b19-9899-8c83325352d8,Automated teller machines (ATM)
+2092098e-dae8-4b19-9899-8c83325352d8,Banks and financial services
+2092098e-dae8-4b19-9899-8c83325352d8,Banks and financial services with walk-up services
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Accessory
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Governmental
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Medical
+2092098e-dae8-4b19-9899-8c83325352d8,Research and development - Offices
+2092098e-dae8-4b19-9899-8c83325352d8,Alcohol sales - Beer and wine
+2092098e-dae8-4b19-9899-8c83325352d8,Alcohol sales - Full alcohol sales
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial nurseries
+2092098e-dae8-4b19-9899-8c83325352d8,Convenience stores
+2092098e-dae8-4b19-9899-8c83325352d8,Food sales
+2092098e-dae8-4b19-9899-8c83325352d8,Liquor stores
+2092098e-dae8-4b19-9899-8c83325352d8,Retail sales
+2092098e-dae8-4b19-9899-8c83325352d8,Seasonal merchandise sales
+2092098e-dae8-4b19-9899-8c83325352d8,Temporary Uses
+2092098e-dae8-4b19-9899-8c83325352d8,Charitable institutions
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day care, large care homes, 9 to 14 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day care, small care homes, 1 to 8 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,Laboratories
+2092098e-dae8-4b19-9899-8c83325352d8,"Printing and publishing, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,Recycling centers - Small collection facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Research and Development - Non-offices
+2092098e-dae8-4b19-9899-8c83325352d8,Accessory antenna array
+2092098e-dae8-4b19-9899-8c83325352d8,"Commercial off-street parking (7, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wireless telecommunications facilities, major"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wireless telecommunications facilities, minor"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wireless telecommunications facilities, SCL"
+2092098e-dae8-4b19-9899-8c83325352d8,"Transit-oriented development (7, 8)"
+2092098e-dae8-4b19-9899-8c83325352d8,Fraternity/sorority housing
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial entertainment
+2092098e-dae8-4b19-9899-8c83325352d8,Schools - Specialized education and training
+2092098e-dae8-4b19-9899-8c83325352d8,Business support services
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - Retail sales
+2092098e-dae8-4b19-9899-8c83325352d8,Bars or taverns
+2092098e-dae8-4b19-9899-8c83325352d8,Bars or taverns with live entertainment
+2092098e-dae8-4b19-9899-8c83325352d8,Internet vehicle sales
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, fast food"
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, formula fast food"
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with limited live entertainment
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with walk-up window
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Automobile rental
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Service stations
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - Grooming
+2092098e-dae8-4b19-9899-8c83325352d8,Catering services
+2092098e-dae8-4b19-9899-8c83325352d8,Drive-through business - Nonrestaurants
+2092098e-dae8-4b19-9899-8c83325352d8,Drive-through business - Restaurants
+2092098e-dae8-4b19-9899-8c83325352d8,Life/care facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Maintenance and repair services
+2092098e-dae8-4b19-9899-8c83325352d8,"Mortuaries, funeral homes"
+2092098e-dae8-4b19-9899-8c83325352d8,Personal improvement services
+2092098e-dae8-4b19-9899-8c83325352d8,Personal services
+2092098e-dae8-4b19-9899-8c83325352d8,Printing and publishing
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle services - Washing and detailing, small-scale"
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted, small scale"
+2092098e-dae8-4b19-9899-8c83325352d8,"Alternative fuel/recharging facilities (7, 8, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,Single-room occupancy
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial recreation - Indoor
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial recreation - Outdoor
+2092098e-dae8-4b19-9899-8c83325352d8,Electronic game centers
+2092098e-dae8-4b19-9899-8c83325352d8,Internet access studios
+2092098e-dae8-4b19-9899-8c83325352d8,Work/live units
+2092098e-dae8-4b19-9899-8c83325352d8,Building materials and supplies sales
+2092098e-dae8-4b19-9899-8c83325352d8,Pawnshops
+2092098e-dae8-4b19-9899-8c83325352d8,Significant tobacco retailers
+2092098e-dae8-4b19-9899-8c83325352d8,Swap meets
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Sales and leasing
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Sales and leasing - limited
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - Boarding
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - Hospitals
+2092098e-dae8-4b19-9899-8c83325352d8,Emergency shelters
+2092098e-dae8-4b19-9899-8c83325352d8,"Lodging - Hotels, motels"
+2092098e-dae8-4b19-9899-8c83325352d8,Massage establishment
+2092098e-dae8-4b19-9899-8c83325352d8,Medical services - Hospitals
+2092098e-dae8-4b19-9899-8c83325352d8,"Personal services, restricted"
+2092098e-dae8-4b19-9899-8c83325352d8,Public maintenance & service facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Sexually oriented business
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Vehicle equipment repair
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Washing and detailing
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted"
+2092098e-dae8-4b19-9899-8c83325352d8,Recycling centers - Large facilities
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution, & storage"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution, & storage, small-scale"
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facilities (7, 8, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,Heliports
+2092098e-dae8-4b19-9899-8c83325352d8,Transportation dispatch facility
+2092098e-dae8-4b19-9899-8c83325352d8,Transportation terminals
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle storage (7, 8)"
+2092098e-dae8-4b19-9899-8c83325352d8,Firearm sales
+2092098e-dae8-4b19-9899-8c83325352d8,Detention facilities
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, standard"
+2092098e-dae8-4b19-9899-8c83325352d8,Trucking terminals
+2092098e-dae8-4b19-9899-8c83325352d8,Caretaker quarters
+2092098e-dae8-4b19-9899-8c83325352d8,Stadiums and arenas
+2092098e-dae8-4b19-9899-8c83325352d8,Maintenance and service facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Recycling - Small collection facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Senior affordable housing
+2092098e-dae8-4b19-9899-8c83325352d8,Conference centers
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle services - Washing/detailing, small scale"
+2092098e-dae8-4b19-9899-8c83325352d8,Allowed Land Use: determined through the process of rezoning property
+2092098e-dae8-4b19-9899-8c83325352d8,Allowed Land Use: determined by primary zoning district
+2092098e-dae8-4b19-9899-8c83325352d8,Multi-family housing/urban housing
+2092098e-dae8-4b19-9899-8c83325352d8,Colleges - nontraditional campus setting (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial entertainment *
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial recreation - indoor *
+2092098e-dae8-4b19-9899-8c83325352d8,Cultural institutions *
+2092098e-dae8-4b19-9899-8c83325352d8,with columbarium
+2092098e-dae8-4b19-9899-8c83325352d8,with temporary homeless shelter
+2092098e-dae8-4b19-9899-8c83325352d8,Schools - specialized education and training (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Automated teller machines (ATM) *
+2092098e-dae8-4b19-9899-8c83325352d8,"Banks, financial services * (13)"
+2092098e-dae8-4b19-9899-8c83325352d8,bank with walk up services *
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - administrative business professional (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - government (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - medical (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Work/live units (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - retail sales * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Bars or taverns * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,with live entertainment *
+2092098e-dae8-4b19-9899-8c83325352d8,Convenience stores *
+2092098e-dae8-4b19-9899-8c83325352d8,Liquor stores * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Pawnshops *
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, fast food * (13)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, formula fast food * (13)"
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with limited live entertainment * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with walk-up window *
+2092098e-dae8-4b19-9899-8c83325352d8,Retail sales * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Significant tobacco retailers * (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - sales and leasing - limited *
+2092098e-dae8-4b19-9899-8c83325352d8,"Adult day-care, general"
+2092098e-dae8-4b19-9899-8c83325352d8,"Adult day-care, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,Ambulance services (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - grooming (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Animal shelters
+2092098e-dae8-4b19-9899-8c83325352d8,Catering services (13)
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day-care, large care homes, 9 to 14 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day-care, small care homes, 1 to 8 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,Laboratories (13)
+2092098e-dae8-4b19-9899-8c83325352d8,"Lodging - hotels, motels (13)"
+2092098e-dae8-4b19-9899-8c83325352d8,Maintenance or repair services
+2092098e-dae8-4b19-9899-8c83325352d8,Massage establishments
+2092098e-dae8-4b19-9899-8c83325352d8,Personal improvement services *
+2092098e-dae8-4b19-9899-8c83325352d8,Personal services *
+2092098e-dae8-4b19-9899-8c83325352d8,Personal services restricted
+2092098e-dae8-4b19-9899-8c83325352d8,"Printing and publishing, limited *"
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle services - washing and detailing, temporary"
+2092098e-dae8-4b19-9899-8c83325352d8,Research and development - non-offices (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Alternative fuel/recharging facilities
+2092098e-dae8-4b19-9899-8c83325352d8,Communications facility (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial off-street parking
+2092098e-dae8-4b19-9899-8c83325352d8,Transit terminal
+2092098e-dae8-4b19-9899-8c83325352d8,"Wireless telecommunication facilities, minor"
+2092098e-dae8-4b19-9899-8c83325352d8,Transit-oriented development
+2092098e-dae8-4b19-9899-8c83325352d8,Heliport
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - boarding (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - hospitals (13)
+2092098e-dae8-4b19-9899-8c83325352d8,"Emergency shelters, limited"
+2092098e-dae8-4b19-9899-8c83325352d8,Medical services - hospital
+2092098e-dae8-4b19-9899-8c83325352d8,Sexually oriented businesses
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicles services - Vehicle/equipment repair
+2092098e-dae8-4b19-9899-8c83325352d8,Accessory antenna arrays
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facility (4, 7 ,8, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wireless telecommunication facilities, major"
+2092098e-dae8-4b19-9899-8c83325352d8,Colleges - traditional campus setting (13)
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - grooming  
+2092098e-dae8-4b19-9899-8c83325352d8,Recycling - Small collection facility
+2092098e-dae8-4b19-9899-8c83325352d8,Schools - specialized education and training 
+2092098e-dae8-4b19-9899-8c83325352d8,Automated teller machines (ATM) 
+2092098e-dae8-4b19-9899-8c83325352d8,"Banks, financial services  "
+2092098e-dae8-4b19-9899-8c83325352d8,with walk up services 
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - administrative business professional 
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - government 
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - medical 
+2092098e-dae8-4b19-9899-8c83325352d8,Work/live units 
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - retail sales  
+2092098e-dae8-4b19-9899-8c83325352d8,Bars or taverns  
+2092098e-dae8-4b19-9899-8c83325352d8,with live entertainment 
+2092098e-dae8-4b19-9899-8c83325352d8,Convenience stores 
+2092098e-dae8-4b19-9899-8c83325352d8,Liquor stores  
+2092098e-dae8-4b19-9899-8c83325352d8,Pawnshops 
+2092098e-dae8-4b19-9899-8c83325352d8,Personal property sales
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants  
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, fast food  "
+2092098e-dae8-4b19-9899-8c83325352d8,"Restaurants, formula fast food  "
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with limited live entertainment  
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with walk-up window 
+2092098e-dae8-4b19-9899-8c83325352d8,Retail sales  
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day-care - Large care home, 9 to 14 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Child day-care - Small care home, 1 to 8 persons"
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle services - Washing/detailing, small-scale"
+2092098e-dae8-4b19-9899-8c83325352d8,Colleges - nontraditional campus setting 
+2092098e-dae8-4b19-9899-8c83325352d8,Significant tobacco retailers  
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - sales and leasing - limited 
+2092098e-dae8-4b19-9899-8c83325352d8,Ambulance services 
+2092098e-dae8-4b19-9899-8c83325352d8,Animal services - grooming 
+2092098e-dae8-4b19-9899-8c83325352d8,Catering services 
+2092098e-dae8-4b19-9899-8c83325352d8,Laboratories 
+2092098e-dae8-4b19-9899-8c83325352d8,Personal improvement services 
+2092098e-dae8-4b19-9899-8c83325352d8,Personal services 
+2092098e-dae8-4b19-9899-8c83325352d8,"Printing and publishing, limited "
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Vehicle/equipment repair
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facility (4, 7, 8, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Commercial off-street parking (7,9)"
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicles services - Washing and detailing
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution and storage"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution and storage, small scale"
+2092098e-dae8-4b19-9899-8c83325352d8,"Transit-oriented development (4, 7)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care facilities, limited (5, 6)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Supportive housing (5, 6)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Transitional housing (5, 6)"
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial growing areas
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Government
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurant with limited live entertainment
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurant with walk-up window
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial nursery
+2092098e-dae8-4b19-9899-8c83325352d8,"Clubs, lodges, private meeting halls (4, 5)"
+2092098e-dae8-4b19-9899-8c83325352d8,with walk-up service
+2092098e-dae8-4b19-9899-8c83325352d8,"Charitable institution (2, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,Personal services - Restricted
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial growing grounds
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted, small scale (3, 8)"
+2092098e-dae8-4b19-9899-8c83325352d8,Research & development - Non-office
+2092098e-dae8-4b19-9899-8c83325352d8,"Commercial off-street parking (2, 10)"
+2092098e-dae8-4b19-9899-8c83325352d8,Multi-family housing (14)
+2092098e-dae8-4b19-9899-8c83325352d8,"Residential care facilities, limited (14, 15)"
+2092098e-dae8-4b19-9899-8c83325352d8,Single-family housing (15)
+2092098e-dae8-4b19-9899-8c83325352d8,"Supportive housing (14, 15)"
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Automobile rental (3)
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle services - Service stations (3, 7)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted (3, 8)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution, & storage (3)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facility (2, 3, 9, 10)"
+2092098e-dae8-4b19-9899-8c83325352d8,Adult Day-Care - General
+2092098e-dae8-4b19-9899-8c83325352d8,Adult Day-Care - Limited
+2092098e-dae8-4b19-9899-8c83325352d8,Wireless telecommunications facilities - Minor
+2092098e-dae8-4b19-9899-8c83325352d8,Wireless telecommunications facilities - Major
+2092098e-dae8-4b19-9899-8c83325352d8,with walk-up services
+2092098e-dae8-4b19-9899-8c83325352d8,Communications facilities
+2092098e-dae8-4b19-9899-8c83325352d8,"Charitable institution (3, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facility (2, 5)"
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle storage
+2092098e-dae8-4b19-9899-8c83325352d8,Multifamily residential (Max: RM-32)
+2092098e-dae8-4b19-9899-8c83325352d8,"Cultural institutions (2, 3)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Religious facilities (2, 9)"
+2092098e-dae8-4b19-9899-8c83325352d8,Adult day care - General
+2092098e-dae8-4b19-9899-8c83325352d8,Adult day care - Limited
+2092098e-dae8-4b19-9899-8c83325352d8,"Filming, short term"
+2092098e-dae8-4b19-9899-8c83325352d8,Printing and publishing - Limited
+2092098e-dae8-4b19-9899-8c83325352d8,Commercial off-street parking (3)
+2092098e-dae8-4b19-9899-8c83325352d8,Utility major
+2092098e-dae8-4b19-9899-8c83325352d8,Utility minor
+2092098e-dae8-4b19-9899-8c83325352d8,"Mixed-use projects (3,4)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Schools - Specialized education and training (3, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,Offices - Accessory to primary use
+2092098e-dae8-4b19-9899-8c83325352d8,with live entertainment
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants - Formula fast food
+2092098e-dae8-4b19-9899-8c83325352d8,Restaurants with take-out window
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Automobile rentals
+2092098e-dae8-4b19-9899-8c83325352d8,Drive-through business - Non-restaurants
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted, small-scale"
+2092098e-dae8-4b19-9899-8c83325352d8,"Alternative fuel/recharging facilities (3, 4, 10)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Commercial entertainment (3, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,Ambulance services
+2092098e-dae8-4b19-9899-8c83325352d8,"Lodging - Hotel, motel"
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Washing/detailing
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, restricted (4, 5)"
+2092098e-dae8-4b19-9899-8c83325352d8,Recycling - Large collection facilities
+2092098e-dae8-4b19-9899-8c83325352d8,"Communications facilities (3, 4, 10)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Vehicle storage (3, 4, 10)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Industry, standard (4, 5)"
+2092098e-dae8-4b19-9899-8c83325352d8,Religious facilities (2)
+2092098e-dae8-4b19-9899-8c83325352d8,"Transit-oriented development (3, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,Vehicle services - Service station
+2092098e-dae8-4b19-9899-8c83325352d8,Drive-through business - Restaurant
+2092098e-dae8-4b19-9899-8c83325352d8,"Building materials and supplies sales (3, 4)"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution & storage"
+2092098e-dae8-4b19-9899-8c83325352d8,"Wholesaling, distribution & storage, small-scale"

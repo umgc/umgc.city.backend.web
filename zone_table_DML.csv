@@ -1,0 +1,118 @@
+city_id,zone_symbol,description
+2092098e-dae8-4b19-9899-8c83325352d8,RS-1,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RS-2,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RS-3,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RS-4,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RS-5,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RS-6,Single-Family Residential (Low-Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RM-12,Multi-Family Residential - Two Units Per Lot (Low-Medium Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RM-16,Multi-Family Residential - City of Gardens (Medium Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RM-32,Multi-Family Residential - City of Gardens (Medium-High Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,RM-48,Multi-Family Residential - City of Gardens (High Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,CO,Commercial Office (General Commercial)
+2092098e-dae8-4b19-9899-8c83325352d8,CL,Limited Commercial (Neighborhood Commercial)
+2092098e-dae8-4b19-9899-8c83325352d8,CL-2,Limited Commercial (Neighborhood Commercial)
+2092098e-dae8-4b19-9899-8c83325352d8,CG,General Commercial (General Commercial)
+2092098e-dae8-4b19-9899-8c83325352d8,IG,General Industrial (Industrial)
+2092098e-dae8-4b19-9899-8c83325352d8,OS,Open Space (Open Space)
+2092098e-dae8-4b19-9899-8c83325352d8,PS,Public and Semi-Public (Institutional)
+2092098e-dae8-4b19-9899-8c83325352d8,PS-1,Public and Semi-Public (Institutional)
+2092098e-dae8-4b19-9899-8c83325352d8,PD,Planned Development (All)
+2092098e-dae8-4b19-9899-8c83325352d8,AD,Alcohol Density (Commercial)
+2092098e-dae8-4b19-9899-8c83325352d8,HD,Hillside Development (Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,HD-1,Hillside Development (Upper Hastings Ranch Area)
+2092098e-dae8-4b19-9899-8c83325352d8,HD-SR,Hillside Development (San Rafael Area)
+2092098e-dae8-4b19-9899-8c83325352d8,HL,Height Limit (All)
+2092098e-dae8-4b19-9899-8c83325352d8,HL-1,Height Limit (Multi-family Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,HH,Hospitality Home (Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,IS,Interim Study (All)
+2092098e-dae8-4b19-9899-8c83325352d8,LD,Landmark (All)
+2092098e-dae8-4b19-9899-8c83325352d8,ND,Neighborhood (Low Density Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,OC,Office Conversion (Multi-family Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,PK,Parking (Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,WAH,Workforce/Affordable Housing (Multi-family Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,SS,Specialty Shop Overlay District (Residential)
+2092098e-dae8-4b19-9899-8c83325352d8,CD-1,Central District Specific Plan - Old Pasadena
+2092098e-dae8-4b19-9899-8c83325352d8,CD-2,Central District Specific Plan - Civic Center/Midtown
+2092098e-dae8-4b19-9899-8c83325352d8,CD-3,Central District Specific Plan - Walnut Housing
+2092098e-dae8-4b19-9899-8c83325352d8,CD-4,Central District Specific Plan - Pasadena Playhouse
+2092098e-dae8-4b19-9899-8c83325352d8,CD-5,Central District Specific Plan - Lake Avenue
+2092098e-dae8-4b19-9899-8c83325352d8,CD-6,Central District Specific Plan - Arroyo Corridor/Fair Oaks
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-1,East Colorado Specific Plan - Mid City
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-2,East Colorado Specific Plan - College District
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CL-3,East Colorado Specific Plan - Gold Line-Limited Commercial area
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-3,East Colorado Specific Plan - Gold Line-General Commercial
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-4,East Colorado Specific Plan - Route 66 area
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-5,East Colorado Specific Plan - Lamanda Park area
+2092098e-dae8-4b19-9899-8c83325352d8,ECSP-CG-6,East Colorado Specific Plan - Chihuahuita area
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-RM-12,"Fair Oaks/Orange Grove Specific Plan - Multi-Family Residential District, 2 units per lot"
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-RM-16,"Fair Oaks/Orange Grove Specific Plan - Multi-family Residential District, 16 units per acre"
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-PS,Fair Oaks/Orange Grove Specific Plan - Public and Semi-Public District
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-OS,Fair Oaks/Orange Grove Specific Plan - Open Space District
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-CL-1a,"Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 1, Subdistrict ""a."""
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-CL-1b,"Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 1, Subdistrict ""b."""
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-C-2,Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 2
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-C-3a,"Fair Oaks/Orange Grove Specific Plan -Limited Commercial District 3, Subdistrict ""a."""
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-C-3b,"Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 3, Subdistrict ""b."""
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-C-3d,"Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 3, Subdistrict ""d."""
+2092098e-dae8-4b19-9899-8c83325352d8,FGSP-C-3c,"Fair Oaks/Orange Grove Specific Plan - Limited Commercial District 3, Subdistrict ""c."""
+2092098e-dae8-4b19-9899-8c83325352d8,WGSP-1A,West Gateway Specific Plan - Ambassador College campus west of St. John Avenue
+2092098e-dae8-4b19-9899-8c83325352d8,WGSP-1B,West Gateway Specific Plan - Ambassador College campus east of Orange Grove Boulevard
+2092098e-dae8-4b19-9899-8c83325352d8,WGSP-1C,West Gateway Specific Plan - Colorado Boulevard area
+2092098e-dae8-4b19-9899-8c83325352d8,WGSP-2,West Gateway Specific Plan - Army Reserve Training Center site
+2092098e-dae8-4b19-9899-8c83325352d8,LASP-RM-16,Lincoln Avenue Specific Plan-RM-16
+2092098e-dae8-4b19-9899-8c83325352d8,LASP-CL,Lincoln Avenue Specific Plan-CL
+2092098e-dae8-4b19-9899-8c83325352d8,LASP-CG-1,Lincoln Avenue Specific Plan-CG-1
+2092098e-dae8-4b19-9899-8c83325352d8,LASP-CG-2,Lincoln Avenue Specific Plan-CG-2
+2092098e-dae8-4b19-9899-8c83325352d8,LASP-PS,Lincoln Avenue Specific Plan-PS
+2092098e-dae8-4b19-9899-8c83325352d8,CO-SP-1a,North Lake Specific Plan - House Building Type
+2092098e-dae8-4b19-9899-8c83325352d8,CL-SP-1b,North Lake Specific Plan - Village Building Type
+2092098e-dae8-4b19-9899-8c83325352d8,CO-SP-1c,North Lake Specific Plan - Village Building Type
+2092098e-dae8-4b19-9899-8c83325352d8,CL-SP-1d,North Lake Specific Plan - Village Building Type
+2092098e-dae8-4b19-9899-8c83325352d8,CL-SP-1e,North Lake Specific Plan - Village Building Type
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2-HL-56,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2-AD-2,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2-AD-3,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2-AD-4,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,IG-SP-2-AD-5,South Fair Oaks Specific Plan
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d1-CO,East Pasadena Specific Plan subarea d1 commercial office district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d1-CL,East Pasadena Specific Plan subarea d1 limited commercial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d1-CG,East Pasadena Specific Plan subarea d1 general commercial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d1-IG,East Pasadena Specific Plan subarea d1 general industrial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d2-CO,East Pasadena Specific Plan subarea d2 commercial office district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d2-CL,East Pasadena Specific Plan subarea d2 limited commercial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d2-CG,East Pasadena Specific Plan subarea d2 general commercial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d2-IG,East Pasadena Specific Plan subarea d2 general industrial district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d2-PS,East Pasadena Specific Plan subarea d2 public/semi-public district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d3-CO,East Pasadena Specific Plan subarea d3 commercial office district
+2092098e-dae8-4b19-9899-8c83325352d8,EPSP-d3-CG,East Pasadena Specific Plan subarea d3 general commercial district
+2092098e-dae8-4b19-9899-8c83325352d8,PD-1,Eaton Canyon Industrial Park
+2092098e-dae8-4b19-9899-8c83325352d8,PD-3,Kinneloa Annexation
+2092098e-dae8-4b19-9899-8c83325352d8,PD-4,Mountain Street Classics Townhomes
+2092098e-dae8-4b19-9899-8c83325352d8,PD-5,Allesandro Place/Fair Oaks
+2092098e-dae8-4b19-9899-8c83325352d8,PD-6,Eaton Wash Residential
+2092098e-dae8-4b19-9899-8c83325352d8,PD-7,Seco Street
+2092098e-dae8-4b19-9899-8c83325352d8,PD-9,El Mirador
+2092098e-dae8-4b19-9899-8c83325352d8,PD-10,Colorado/Lake
+2092098e-dae8-4b19-9899-8c83325352d8,PD-11,"Foothill Boulevard, Craig Avenue and White Street"
+2092098e-dae8-4b19-9899-8c83325352d8,PD-12,Walnut - Los Robles
+2092098e-dae8-4b19-9899-8c83325352d8,PD-13,Marengo - bellevue
+2092098e-dae8-4b19-9899-8c83325352d8,PD-15,Huntington Hotel
+2092098e-dae8-4b19-9899-8c83325352d8,PD-16,Jet Propulsion Laboratory (Employee Parking)
+2092098e-dae8-4b19-9899-8c83325352d8,PD-17,Rose Townhomes
+2092098e-dae8-4b19-9899-8c83325352d8,PD-18,Colorado/El Nido
+2092098e-dae8-4b19-9899-8c83325352d8,PD-21,Montgomery Engineering
+2092098e-dae8-4b19-9899-8c83325352d8,PD-22,Lincoln Triangle Townhouse
+2092098e-dae8-4b19-9899-8c83325352d8,PD-23,Salvation Army
+2092098e-dae8-4b19-9899-8c83325352d8,PD-24,South Lake Avenue Development
+2092098e-dae8-4b19-9899-8c83325352d8,PD-25,Vista Del Arroyo Bungalows
+2092098e-dae8-4b19-9899-8c83325352d8,PD-26,Colorado - Los Robles
+2092098e-dae8-4b19-9899-8c83325352d8,PD-27,King's Village
+2092098e-dae8-4b19-9899-8c83325352d8,PD-28,Community Arms
+2092098e-dae8-4b19-9899-8c83325352d8,PD-29,Artisan Village
+2092098e-dae8-4b19-9899-8c83325352d8,PD-31,Montana I and II
+2092098e-dae8-4b19-9899-8c83325352d8,PD-32,Rose Avenue
+2092098e-dae8-4b19-9899-8c83325352d8,PD-33,DESIDERIO
+2092098e-dae8-4b19-9899-8c83325352d8,PD-34,100 West Walnut Planned Development
+2092098e-dae8-4b19-9899-8c83325352d8,PD-35,Colorado Hill Planned Development
