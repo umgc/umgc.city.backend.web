@@ -40,6 +40,20 @@ public class ZoningProjectController {
         return ResponseEntity.ok( zoningProjectService.createUserAccount(userAccount));
     }
 
+    @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> createUseCase(@RequestBody UseCaseDto useCase) throws CityNotFoundException, UseCaseBadRequestException {
+        zoningProjectService.createUseCase(useCase);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> editUseCase(@RequestBody UseCaseDto useCase) throws ZoneNotFoundException, UseCaseBadRequestException {
+        zoningProjectService.editUseCase(useCase);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping(value = "/cities/{id}/zones", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Zone>> getZonesByCity(@PathVariable("id") UUID cityId) throws ZoneNotFoundException {
         return new ResponseEntity<>(zoningProjectService.getZonesByCityId(cityId), HttpStatus.FOUND);
@@ -62,7 +76,6 @@ public class ZoningProjectController {
         return new ResponseEntity<>(zoningProjectService.getUseCaseDto(zoneId), HttpStatus.FOUND);
     }
 
-
     @PostMapping(value = "/users/sendcredentials", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws EmailException {
         return ResponseEntity.ok(zoningProjectService.sendAdminUserCredentialsInEmail(userAccount));
@@ -78,11 +91,6 @@ public class ZoningProjectController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-
-    /* Ziad */
-// TODO: Add Create Use Case
-// TODO: Add Edit Use Case
-//
 
 //   /* Krystina */
 

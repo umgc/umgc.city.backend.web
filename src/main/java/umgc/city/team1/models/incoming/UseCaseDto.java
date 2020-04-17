@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UseCaseDto {
-
+    private UUID cityId;
     private UUID zoneId;
     private String zoneSymbol;
     private String zoneDescription;
