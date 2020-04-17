@@ -1,8 +1,5 @@
 package umgc.city.team1.exceptions;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.Date;
 
-
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @RestControllerAdvice
-@Data
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     private ExceptionResponse exceptionResponse;

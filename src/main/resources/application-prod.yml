@@ -7,4 +7,4 @@ spring:
     password: 83f4c6d22bf009a1a3c8a208ba728a9630347c5f71ff8593be4511f72b2b3a09
     driver-class-name: org.postgresql.Driver
 email:
-  home-url: http://localhost:4200/home
+  homeURL: http://localhost:4200/home

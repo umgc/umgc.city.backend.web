@@ -1,5 +1,7 @@
 package umgc.city.team1.utilities;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
@@ -7,16 +9,19 @@ import org.simplejavamail.mailer.MailerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import umgc.city.team1.config.MailProperties;
 import umgc.city.team1.models.outgoing.EmailInfo;
 import umgc.city.team1.models.outgoing.EmailStatus;
 
+@Data
+@Service
+@RequiredArgsConstructor
 public class SMTPEmailService {
-    @Value("${send-grid.api-key}") private String sendGridAPIKey;
-    @Value("${send-grid.host}") private String host;
-    @Value("${send-grid.username}") private String username;
-    @Value("${send-grid.port}") private int port;
+
 
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
+    private  final MailProperties mailProperties;
 
     public void sendEmail(String senderEmail, String recipientEmail, String subject, String body) {
         //Construct EmailInfo object and redirect to sendEmail(emailInfo)
@@ -45,7 +50,8 @@ public class SMTPEmailService {
                     .buildEmail();
 
             Mailer mailer = MailerBuilder
-                    .withSMTPServer(host, port, username, sendGridAPIKey)
+                    .withSMTPServer(mailProperties.getHost(), mailProperties.getPort(), mailProperties.getUsername(),
+                            mailProperties.getApiKey())
                     .buildMailer();
 
             mailer.sendMail(email);

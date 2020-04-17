@@ -21,6 +21,10 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: none
+  freemarker:
+    template-loader-path: classpath:/template
+    content-type: text/html
+    suffix: .ftl
 
   h2:
     console:
@@ -37,11 +41,12 @@ management:
 server:
   port: 5000
 
-grid-email:
-  api-key: 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
+email:
+  apiKey: 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
   host: smtp.sendgrid.net
   port: 587
   username: apikey
+
 
 
 

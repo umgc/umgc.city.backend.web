@@ -1,9 +1,9 @@
 package umgc.city.team1.utilities;
 
 import com.sendgrid.*;
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import umgc.city.team1.exceptions.EmailException;
@@ -12,34 +12,18 @@ import umgc.city.team1.models.outgoing.EmailInfo;
 import java.io.IOException;
 
 @Service
+@Data
 public class SendGridEmailService {
-    @Value("${send-grid.api-key}") private String sendGridAPIKey;
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
-    private final SendGrid sendGridClient = new SendGrid(sendGridAPIKey);
 
-    public void sendEmail(String senderEmail, String recipientEmail, String subject, String body) throws EmailException {
-        //Construct EmailInfo object and redirect to sendEmail(emailInfo)
-        EmailInfo emailInfo = new EmailInfo();
-
-        emailInfo.setSenderEmail(senderEmail);
-
-        emailInfo.setRecipientEmail(recipientEmail);
-
-        emailInfo.setSubject(subject);
-
-        emailInfo.setBody(body);
-
-        sendGridAPI(emailInfo);
-    }
-
-    private void sendGridAPI(EmailInfo email) throws EmailException {
+    public void sendEmail(EmailInfo email, String sendGridAPIKey) throws EmailException {
 
         //Populate SendGrid required parameters
         Email senderEmail = new Email(email.getSenderEmail(), email.getSenderName());
 
         Email recipientEmail = new Email(email.getRecipientEmail(), email.getRecipientName());
 
-        Content content = new Content("text/html", email.getBody());
+        Content content = new Content(email.getContentType(), email.getBody());
 
         Mail mail = new Mail(senderEmail, email.getSubject(), recipientEmail, content);
 
@@ -48,11 +32,12 @@ public class SendGridEmailService {
         try {
             request.setMethod(Method.POST);
 
-            request.setEndpoint("mail/send");
+            request.setEndpoint(Constants.REQUEST_ENDPOINT);
 
             request.setBody(mail.build());
 
             //Get SendGrid response
+            SendGrid sendGridClient = new SendGrid(sendGridAPIKey);
             Response response = sendGridClient.api(request);
 
             //SendGrid's sent emails come back with a status code of 202 or 200
