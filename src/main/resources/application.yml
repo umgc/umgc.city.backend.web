@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     hikari:
-      pool-name: UMGCityHikariConnPool
+      pool-name: UMGCCityHikariConnPool
       connection-timeout: 20000
       minimum-idle: 2
       maximum-pool-size: 4
@@ -27,6 +27,21 @@ spring:
       path: /h2-console
       enabled: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /city-zoning-project-management
+
 server:
   port: 5000
+
+grid-email:
+  api-key: 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
+  host: smtp.sendgrid.net
+  port: 587
+  username: apikey
+
+
 

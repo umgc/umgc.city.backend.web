@@ -5,5 +5,6 @@ spring:
     url: jdbc:postgresql://localhost:5433/UMGCity?currentSchema=public
     username: postgres
     password: postgres
-
+email:
+  home-url: http://localhost:4200/home
 

@@ -1,12 +1,11 @@
 package umgc.city.team1.models;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
-import umgc.city.team1.models.DevelopmentStandards;
+
 import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -19,7 +18,7 @@ class DevelopmentStandardsTest {
         UUID uuid = UUID.randomUUID();
         try {
             developmentStandards.setId(uuid);
-            assertEquals(developmentStandards.getId(),uuid);
+            assertEquals(developmentStandards.getId(), uuid);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }
@@ -54,7 +53,7 @@ class DevelopmentStandardsTest {
         String URL = "https://domain.anywhere/url";
         try {
             developmentStandards.setAdditionalStandardsURL(URL);
-            assertEquals(developmentStandards.getAdditionalStandardsURL(),URL);
+            assertEquals(developmentStandards.getAdditionalStandardsURL(), URL);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }
@@ -66,7 +65,7 @@ class DevelopmentStandardsTest {
         String URL = "https://domain.anywhere/url";
         try {
             developmentStandards.setGardenStandardsURL(URL);
-            assertEquals(developmentStandards.getGardenStandardsURL(),URL);
+            assertEquals(developmentStandards.getGardenStandardsURL(), URL);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }
@@ -78,7 +77,7 @@ class DevelopmentStandardsTest {
         String URL = "https://domain.anywhere/url";
         try {
             developmentStandards.setFrontageAndFacadesStandardsURL(URL);
-            assertEquals(developmentStandards.getFrontageAndFacadesStandardsURL(),URL);
+            assertEquals(developmentStandards.getFrontageAndFacadesStandardsURL(), URL);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }

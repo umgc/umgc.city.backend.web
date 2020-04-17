@@ -1,11 +1,10 @@
 package umgc.city.team1.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
-import umgc.city.team1.models.ZoneLandUse;
+
 import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -17,7 +16,7 @@ class ZoneLandUseTest {
         UUID uuid = UUID.randomUUID();
         try {
             zoneLandUse.setId(uuid);
-            assertEquals(zoneLandUse.getId(),uuid);
+            assertEquals(zoneLandUse.getId(), uuid);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }
@@ -29,7 +28,7 @@ class ZoneLandUseTest {
         String description = "Description";
         try {
             zoneLandUse.setDescription(description);
-            assertEquals(zoneLandUse.getDescription(),description);
+            assertEquals(zoneLandUse.getDescription(), description);
         } catch (Exception e2) {
             fail("Threw exception when not expected one");
         }

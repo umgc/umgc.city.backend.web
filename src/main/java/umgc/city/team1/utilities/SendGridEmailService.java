@@ -1,28 +1,23 @@
 package umgc.city.team1.utilities;
 
 import com.sendgrid.*;
-import umgc.city.team1.models.outgoing.EmailInfo;
-import umgc.city.team1.models.outgoing.EmailStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import umgc.city.team1.exceptions.EmailException;
+import umgc.city.team1.models.outgoing.EmailInfo;
 
 import java.io.IOException;
 
-public class SendGridEmailService implements EmailService {
+@Service
+public class SendGridEmailService {
+    @Value("${send-grid.api-key}") private String sendGridAPIKey;
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
-    private final String aPIKey = "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";//"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"; ////TODO Move to configuration
-    private final SendGrid sendgridClient = new SendGrid(aPIKey);
+    private final SendGrid sendGridClient = new SendGrid(sendGridAPIKey);
 
-    @Override
-    public boolean sendEmail(EmailInfo emailInfo) {
-        //Send email
-        EmailStatus emailStatus = sendGridAPI(emailInfo);
-
-        return emailStatus.isSent();
-    }
-
-    @Override
-    public boolean sendEmail(String senderEmail, String recipientEmail, String subject, String body) {
+    public void sendEmail(String senderEmail, String recipientEmail, String subject, String body) throws EmailException {
         //Construct EmailInfo object and redirect to sendEmail(emailInfo)
         EmailInfo emailInfo = new EmailInfo();
 
@@ -34,18 +29,17 @@ public class SendGridEmailService implements EmailService {
 
         emailInfo.setBody(body);
 
-        return sendEmail(emailInfo);
+        sendGridAPI(emailInfo);
     }
 
-    private EmailStatus sendGridAPI(EmailInfo email) {
-        var emailStatus = new EmailStatus();
+    private void sendGridAPI(EmailInfo email) throws EmailException {
 
         //Populate SendGrid required parameters
         Email senderEmail = new Email(email.getSenderEmail(), email.getSenderName());
 
         Email recipientEmail = new Email(email.getRecipientEmail(), email.getRecipientName());
 
-        Content content = new Content("text/plain", email.getBody());
+        Content content = new Content("text/html", email.getBody());
 
         Mail mail = new Mail(senderEmail, email.getSubject(), recipientEmail, content);
 
@@ -59,23 +53,15 @@ public class SendGridEmailService implements EmailService {
             request.setBody(mail.build());
 
             //Get SendGrid response
-            Response response = sendgridClient.api(request);
+            Response response = sendGridClient.api(request);
 
-            //SendGrid's sent emails come back with a status code of 202
-            if (response.getStatusCode() != 202) { ////TODO refactor if Java includes a success response method to replace the status code
-                emailStatus.setSent(false);
-
-                emailStatus.setErrorMessage("Emailed failed to send. Error code: " + response.getStatusCode());
+            //SendGrid's sent emails come back with a status code of 202 or 200
+            if (response.getStatusCode() != 202 || response.getStatusCode() !=200) {
+                throw new EmailException("Email Failed: " + response.getStatusCode());
             }
-
-            emailStatus.setSent(true);
-        } catch (IOException ex) {
+        } catch (IOException | EmailException ex) {
             logger.error(ex.getMessage());
-
-            emailStatus.setSent(false);
-
-            emailStatus.setErrorMessage("Emailed failed to send. Error code: " + ex.getMessage());
+            throw new EmailException("Email Failed:" + HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return emailStatus;
     }
 }
