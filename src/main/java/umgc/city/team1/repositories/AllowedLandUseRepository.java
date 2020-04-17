@@ -20,6 +20,9 @@ public interface AllowedLandUseRepository extends JpaRepository<AllowedLandUse, 
 
     @Query("SELECT alu from AllowedLandUse as alu where alu.zone.id = :zoneId")
     List<AllowedLandUse> findAllByZone(@Param("zoneId") UUID zoneId);
+
+    @Query("SELECT alu from AllowedLandUse as alu where alu.zone.id = :zoneId and alu.zoneLandUse.id = :zoneLandUseId")
+    Optional<AllowedLandUse> findAllByZoneandZoneLandUse(@Param("zoneId") UUID zoneId, @Param("zoneLandUseId") UUID zoneLandUseId);
 }
 
 

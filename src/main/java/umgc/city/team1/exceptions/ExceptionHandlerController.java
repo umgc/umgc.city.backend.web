@@ -87,6 +87,14 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = UseCaseBadRequestException.class)
+    public ResponseEntity<ExceptionResponse> UseCaseBadRequestError(UseCaseBadRequestException exception,
+                                                                       HttpServletRequest request ){
+        exceptionResponse = getExceptionResponse(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST.name(),
+                exception.getMessage(), request.getRequestURI());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
     private ExceptionResponse getExceptionResponse(String status, String error, String message, String uri) {
         return new ExceptionResponse(message, getDateNow(), uri, status, error);
     }
