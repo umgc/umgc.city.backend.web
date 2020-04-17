@@ -34,12 +34,9 @@ public class ZoneLandUse implements Serializable {
     @JsonIgnore
     private City city;
 
-    @OneToOne(mappedBy = "zoneLandUse")
-    @JsonIgnore
-    private AllowedLandUse allowedLandUse;
-
-    public ZoneLandUse(String description){
+    public ZoneLandUse(String description, City city){
         this.description = description;
+        this.city = city;
     }
 
 }

@@ -74,7 +74,7 @@ public class ZoningProjectService {
     }
 
     public List<UseCaseDto> getUseCasesByCity(UUID cityId) throws UseCaseNotFoundException {
-        return Optional.of(cityRepository.findUseCaseByCityId(cityId)).orElseThrow(() -> new UseCaseNotFoundException(
+        return Optional.of(zoneRepository.findUseCaseByCityId(cityId)).orElseThrow(() -> new UseCaseNotFoundException(
                 "Land Use Cases could not be found for city with Id: " + cityId));
     }
 
@@ -129,176 +129,97 @@ public class ZoningProjectService {
         return this.allowedLandUseRepository.findAllByZoneandZoneLandUse(zoneId, zoneLandUseId);
     }
 
-    public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseBadRequestException {
-        //null out id fields
-        useCaseDto.setZoneId(null);
-        useCaseDto.setZoneLandUseId(null);
-
-        //validate data
-        validateCreateUseCase(useCaseDto);
-
-        //Get city by city Id
-        Optional<City> cityOptional = getCityById(useCaseDto.getCityId());
-
-        if (!cityOptional.isPresent()) throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found");
-
-        City city = cityOptional.get();
+    public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseNotFoundException {
+        City city = new City(Optional.ofNullable(getCityById(useCaseDto.getCityId()))
+                .orElseThrow(() -> new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found")));
 
         //Get zone by zone symbol
+        Zone zone;
         Optional<Zone> zoneOptional = getZoneBySymbol(useCaseDto.getZoneSymbol(), city.getId());
+        zone = zoneOptional.orElseGet(() -> new Zone(useCaseDto.getZoneSymbol(), useCaseDto.getZoneDescription(),
+                city));
+            zoneRepository.save(zone);
 
-        Zone zone = new Zone();
-        if (!zoneOptional.isPresent()) {
-            //Construct Zone and save it to the database
-            zone.setCity(city);
+            //Construct DevelopmentStandards and save it to the database
+            DevelopmentStandards developmentStandards = new DevelopmentStandards(useCaseDto.getGeneralStandardURL(),
+                    useCaseDto.getAdditionalStandardURL(), useCaseDto.getGardenStandardURL(),
+                    useCaseDto.getFrontageAndFacadesStandardURL(), zone);
+            developmentStandardsRepository.save(developmentStandards);
+
+            //Get zoneLandUseOptional by Description
+            Optional<ZoneLandUse> zoneLandUseOptional = getZoneLandUseByDescription(useCaseDto.getZoneLandUseDescription(), city.getId());
+            ZoneLandUse zoneLandUse;
+            if (zoneLandUseOptional.isEmpty()) {
+                //Construct ZoneLandUse and save it to the database
+                zoneLandUse = new ZoneLandUse(useCaseDto.getZoneLandUseDescription(), city);
+                zoneLandUseRepository.save(zoneLandUse);
+            } else {
+                zoneLandUse = zoneLandUseOptional.get();
+            }
+
+            //Get AllowedLandUse by zone and landUse
+            Optional<AllowedLandUse> allowedLandUseOptional = getAllowedLandUseByZoneAndZoneLandUSe(zone.getId(), zoneLandUse.getId());
+            if (allowedLandUseOptional.isPresent())
+                throw new UseCaseNotFoundException("Use Case Already Exists");
+            AllowedLandUse allowedLandUse = new AllowedLandUse(useCaseDto.getPermitName(),
+                    useCaseDto.getPermitDescription(), useCaseDto.getProcedureURL(), useCaseDto.getApplicationURL(),
+                    zoneLandUse, zone);
+            allowedLandUseRepository.save(allowedLandUse);
+
+        }
+
+
+    public void editUseCase(UseCaseDto useCaseDto) throws UseCaseNotFoundException {
+
+       Optional<Zone> zoneOptional = Optional.of(zoneRepository.findById(useCaseDto.getZoneId()))
+               .orElseThrow(() -> new UseCaseNotFoundException("Use Case Does Not Exist with Zone Id: " + useCaseDto.getZoneId()));
+        //Get zone by id
+        //noinspection OptionalGetWithoutIsPresent already checked above
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        Zone zone = zoneOptional.get();
             zone.setDescription(useCaseDto.getZoneDescription());
             zone.setZoneSymbol(useCaseDto.getZoneSymbol());
             zoneRepository.save(zone);
 
-            //Construct DevelopmentStandards and save it to the database
-            DevelopmentStandards developmentStandards = new DevelopmentStandards();
-            developmentStandards.setZone(zone);
+        //Construct DevelopmentStandards and save it to the database
+        Optional<DevelopmentStandards> developmentStandardsOptional =
+                Optional.of(developmentStandardsRepository.findByZoneId(useCaseDto.getZoneId()))
+                .orElseThrow(() -> new UseCaseNotFoundException("Use Case Invalid: No Existing Development Standards " +
+                        "Exist for Zone Id: " + useCaseDto.getZoneId()));
+
+            @SuppressWarnings("OptionalGetWithoutIsPresent")
+            DevelopmentStandards developmentStandards = developmentStandardsOptional.get();
             developmentStandards.setAdditionalStandardsURL(useCaseDto.getAdditionalStandardURL());
             developmentStandards.setFrontageAndFacadesStandardsURL(useCaseDto.getFrontageAndFacadesStandardURL());
             developmentStandards.setGardenStandardsURL(useCaseDto.getGardenStandardURL());
             developmentStandards.setGeneralStandardsURL(useCaseDto.getGeneralStandardURL());
             developmentStandardsRepository.save(developmentStandards);
-        } else {
-            zone = zoneOptional.get();
-        }
 
         //Get zoneLandUseOptional by Description
-        Optional<ZoneLandUse> zoneLandUseOptional = getZoneLandUseByDescription(useCaseDto.getZoneLandUseDescription(), city.getId());
+        Optional<ZoneLandUse> zoneLandUseOptional =
+                Optional.of(zoneLandUseRepository.findById(useCaseDto.getZoneLandUseId()))
+                        .orElseThrow(() -> new UseCaseNotFoundException("Use Case Invalid: No Existing Zone Land Use " +
+                                "Exist for Zone Id: " + useCaseDto.getZoneId()));
 
-        ZoneLandUse zoneLandUse = new ZoneLandUse();
-        if (!zoneLandUseOptional.isPresent()) {
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        ZoneLandUse zoneLandUse = zoneLandUseOptional.get();
             //Construct ZoneLandUse and save it to the database
-            zoneLandUse.setCity(city);
             zoneLandUse.setDescription(useCaseDto.getZoneLandUseDescription());
             zoneLandUseRepository.save(zoneLandUse);
-        } else {
-            zoneLandUse = zoneLandUseOptional.get();
-        }
 
         //Get AllowedLandUse by zone and landUse
-        Optional<AllowedLandUse> allowedLandUseOptional = getAllowedLandUseByZoneAndZoneLandUSe(zone.getId(), zoneLandUse.getId());
+        Optional<AllowedLandUse> allowedLandUseOptional =
+                Optional.of(allowedLandUseRepository.findAllByZoneandZoneLandUse(useCaseDto.getZoneId(), useCaseDto.getZoneLandUseId()))
+                            .orElseThrow(() -> new UseCaseNotFoundException("Use Case Invalid: No Existing Allowed " +
+                                    "Land Use Case Exist for Zone Id: " + useCaseDto.getZoneId() + " and " + useCaseDto.getZoneLandUseId()));
 
-        AllowedLandUse allowedLandUse = new AllowedLandUse();
-        if (!allowedLandUseOptional.isPresent()) {
-            //Construct AllowedLandUse and save it to the database
-            allowedLandUse.setZoneLandUse(zoneLandUse);
-            allowedLandUse.setZone(zone);
-            allowedLandUse.setApplicationUrl(useCaseDto.getApplicationURL());
-            allowedLandUse.setPermitDescription(useCaseDto.getPermitDescription());
-            allowedLandUse.setPermitName(useCaseDto.getPermitName());
-            allowedLandUse.setProcedureUrl(useCaseDto.getProcedureURL());
-            allowedLandUseRepository.save(allowedLandUse);
-        } else {
-            throw new UseCaseBadRequestException("Use Case Already Exists");
-        }
-    }
-
-    public void editUseCase(UseCaseDto useCaseDto) throws ZoneNotFoundException, UseCaseBadRequestException {
-        //validate data
-        validateEditUseCase(useCaseDto);
-
-        //Get zone by id
-        Optional<Zone> zoneOptional = zoneRepository.findById(useCaseDto.getZoneId());
-
-        if (zoneOptional.isPresent()) {
-            Zone zone = zoneOptional.get();
-            //Construct Zone and save it to the database
-            zone.setDescription(useCaseDto.getZoneDescription());
-            zone.setZoneSymbol(useCaseDto.getZoneSymbol());
-            zoneRepository.save(zone);
-
-            //Construct DevelopmentStandards and save it to the database
-            Optional<DevelopmentStandards> developmentStandardsOptional = developmentStandardsRepository.findByZoneId(zone.getId());
-
-            if (developmentStandardsOptional.isPresent()) {
-                DevelopmentStandards developmentStandards = new DevelopmentStandards();
-                developmentStandards = developmentStandardsOptional.get();
-                developmentStandards.setAdditionalStandardsURL(useCaseDto.getAdditionalStandardURL());
-                developmentStandards.setFrontageAndFacadesStandardsURL(useCaseDto.getFrontageAndFacadesStandardURL());
-                developmentStandards.setGardenStandardsURL(useCaseDto.getGardenStandardURL());
-                developmentStandards.setGeneralStandardsURL(useCaseDto.getGeneralStandardURL());
-                developmentStandardsRepository.save(developmentStandards);
-            }
-
-            //Get zoneLandUseOptional by Description
-            Optional<ZoneLandUse> zoneLandUseOptional = zoneLandUseRepository.findById(useCaseDto.getZoneLandUseId());
-
-            ZoneLandUse zoneLandUse = new ZoneLandUse();
-            if (zoneLandUseOptional.isPresent()) {
-                //Construct ZoneLandUse and save it to the database
-                zoneLandUse = zoneLandUseOptional.get();
-                zoneLandUse.setDescription(useCaseDto.getZoneLandUseDescription());
-                zoneLandUseRepository.save(zoneLandUse);
-            }
-
-            //Get AllowedLandUse by zone and landUse
-            Optional<AllowedLandUse> allowedLandUseOptional = getAllowedLandUseByZoneAndZoneLandUSe(zone.getId(), zoneLandUse.getId());
-
-            AllowedLandUse allowedLandUse = new AllowedLandUse();
-            if (allowedLandUseOptional.isPresent()) {
-                //Construct AllowedLandUse and save it to the database
-                allowedLandUse = allowedLandUseOptional.get();
-                allowedLandUse.setApplicationUrl(useCaseDto.getApplicationURL());
-                allowedLandUse.setPermitDescription(useCaseDto.getPermitDescription());
-                allowedLandUse.setPermitName(useCaseDto.getPermitName());
-                allowedLandUse.setProcedureUrl(useCaseDto.getProcedureURL());
-                allowedLandUseRepository.save(allowedLandUse);
-            } else {
-                throw new UseCaseBadRequestException("Use case does not exist");
-            }
-        } else {
-            throw new ZoneNotFoundException("Zone with id " + useCaseDto.getZoneId() + " not found");
-        }
-    }
-
-    private void validateEditUseCase(UseCaseDto useCaseDto) throws UseCaseBadRequestException {
-        //validate data
-        ArrayList<String> errors = new ArrayList<String>();
-
-        if (useCaseDto.getZoneId() == null) errors.add("zoneId is required");
-        if (useCaseDto.getZoneLandUseId() == null) errors.add("zoneLandUseId is required");
-        if (useCaseDto.getCityId() == null) errors.add("cityId is required");
-        if (useCaseDto.getZoneSymbol() == null) errors.add("zoneSymbol is required");
-        if (useCaseDto.getZoneDescription() == null) errors.add("zoneDescription is required");
-        if (useCaseDto.getApplicationURL() == null) errors.add("applicationURL is required");
-        if (useCaseDto.getProcedureURL() == null) errors.add("procedureURL is required");
-        if (useCaseDto.getPermitName() == null) errors.add("permitName is required");
-        if (useCaseDto.getPermitDescription() == null) errors.add("permitDescription is required");
-        if (useCaseDto.getZoneLandUseDescription() == null) errors.add("zoneLandUseDescription is required");
-        if (useCaseDto.getGeneralStandardURL() == null) errors.add("generalStandardURL is required");
-        if (useCaseDto.getGardenStandardURL() == null) errors.add("gardenStandardURL is required");
-        if (useCaseDto.getAdditionalStandardURL() == null) errors.add("additionalStandardURL is required");
-        if (useCaseDto.getFrontageAndFacadesStandardURL() == null)
-            errors.add("frontageAndFacadesStandardURL is required");
-
-        //throw exception if there is valid data
-        if (errors.size() > 0) throw new UseCaseBadRequestException(String.join(", ", errors));
-    }
-
-    private void validateCreateUseCase(UseCaseDto useCaseDto) throws UseCaseBadRequestException {
-        //validate data
-        ArrayList<String> errors = new ArrayList<String>();
-
-        if (useCaseDto.getCityId() == null) errors.add("cityId is required");
-        if (useCaseDto.getZoneSymbol() == null) errors.add("zoneSymbol is required");
-        if (useCaseDto.getZoneDescription() == null) errors.add("zoneDescription is required");
-        if (useCaseDto.getApplicationURL() == null) errors.add("applicationURL is required");
-        if (useCaseDto.getProcedureURL() == null) errors.add("procedureURL is required");
-        if (useCaseDto.getPermitName() == null) errors.add("permitName is required");
-        if (useCaseDto.getPermitDescription() == null) errors.add("permitDescription is required");
-        if (useCaseDto.getZoneLandUseDescription() == null) errors.add("zoneLandUseDescription is required");
-        if (useCaseDto.getGeneralStandardURL() == null) errors.add("generalStandardURL is required");
-        if (useCaseDto.getGardenStandardURL() == null) errors.add("gardenStandardURL is required");
-        if (useCaseDto.getAdditionalStandardURL() == null) errors.add("additionalStandardURL is required");
-        if (useCaseDto.getFrontageAndFacadesStandardURL() == null)
-            errors.add("frontageAndFacadesStandardURL is required");
-
-        //throw exception if there is valid data
-        if (errors.size() > 0) throw new UseCaseBadRequestException(String.join(", ", errors));
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        AllowedLandUse allowedLandUse = allowedLandUseOptional.get();
+        allowedLandUse.setApplicationUrl(useCaseDto.getApplicationURL());
+        allowedLandUse.setPermitDescription(useCaseDto.getPermitDescription());
+        allowedLandUse.setPermitName(useCaseDto.getPermitName());
+        allowedLandUse.setProcedureUrl(useCaseDto.getProcedureURL());
+        allowedLandUseRepository.save(allowedLandUse);
     }
 }
+

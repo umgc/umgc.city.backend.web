@@ -9,8 +9,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -38,11 +36,11 @@ public class Zone implements Serializable {
     @JsonIgnore
     private City city;
 
-    public Zone(UUID id, String zoneSymbol, String description, City city){
-        this.id = id;
+    public Zone(String zoneSymbol, String description, City city){
         this.zoneSymbol = zoneSymbol;
         this.description = description;
         this.city = city;
     }
 
+    public Zone(Zone zone) {}
 }

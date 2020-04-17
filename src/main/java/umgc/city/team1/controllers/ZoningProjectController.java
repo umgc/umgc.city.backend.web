@@ -42,14 +42,14 @@ public class ZoningProjectController {
 
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> createUseCase(@RequestBody UseCaseDto useCase) throws CityNotFoundException, UseCaseBadRequestException {
+    public ResponseEntity<HttpStatus> createUseCase(@RequestBody UseCaseDto useCase) throws CityNotFoundException, UseCaseNotFoundException {
         zoningProjectService.createUseCase(useCase);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> editUseCase(@RequestBody UseCaseDto useCase) throws ZoneNotFoundException, UseCaseBadRequestException {
+    public ResponseEntity<HttpStatus> editUseCase(@RequestBody UseCaseDto useCase) throws UseCaseNotFoundException {
         zoningProjectService.editUseCase(useCase);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -97,13 +97,5 @@ public class ZoningProjectController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-
-//   /* Krystina */
-
-//    TODO: Add Get Use Case by City
-//    @GetMapping(value = "/cities/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity getUseCasesByCity(@PathVariable("id") UUID id) {
-//        return ResponseEntity.ok(zoningProjectService.getUseCaseByCity(id));
-//    }
 
 }
