@@ -59,8 +59,14 @@ public class ZoningProjectController {
 
     @GetMapping(value = "/cities/zones/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UseCaseDto>> getUseCasesByZoneId(@PathVariable("id") UUID zoneId) throws UseCaseNotFoundException {
-        return new ResponseEntity<>(zoningProjectService.getUseCaseDto(zoneId), HttpStatus.FOUND);
+        return new ResponseEntity<>(zoningProjectService.getUseCasesByZone(zoneId), HttpStatus.FOUND);
     }
+
+    @GetMapping(value = "/cities/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UseCaseDto>> getUseCasesByCityId(@PathVariable("id") UUID cityId) throws UseCaseNotFoundException {
+        return new ResponseEntity<>(zoningProjectService.getUseCasesByCity(cityId), HttpStatus.FOUND);
+    }
+
 
 
     @PostMapping(value = "/users/sendcredentials", produces = MediaType.APPLICATION_JSON_VALUE)

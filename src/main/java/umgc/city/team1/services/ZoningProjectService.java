@@ -72,9 +72,14 @@ public class ZoningProjectService {
                 .orElseThrow(() -> new ZoneNotFoundException("Zone could not be found with Id:" + zoneId));
     }
 
-    public List<UseCaseDto> getUseCaseDto(UUID zoneId) throws UseCaseNotFoundException {
+    public List<UseCaseDto> getUseCasesByZone(UUID zoneId) throws UseCaseNotFoundException {
         return Optional.of(zoneRepository.findUseCaseByZoneId(zoneId)).orElseThrow(() -> new UseCaseNotFoundException(
                 "Land Use Cases could not be found for zone with Id: " + zoneId));
+    }
+
+    public List<UseCaseDto> getUseCasesByCity(UUID cityId) throws UseCaseNotFoundException {
+        return Optional.of(cityRepository.findUseCaseByCityId(cityId)).orElseThrow(() -> new UseCaseNotFoundException(
+                "Land Use Cases could not be found for city with Id: " + cityId));
     }
 
     public String sendAdminUserCredentialsInEmail(UserAccount userAccount) throws CityUserNotFoundException,
