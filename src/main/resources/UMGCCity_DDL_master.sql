@@ -32,7 +32,12 @@ CREATE TABLE public.city_user
     password character varying(100) COLLATE pg_catalog."default" NOT NULL,
     last_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     first_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT city_user_pkey PRIMARY KEY (id)
+    authorities_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    CONSTRAINT city_user_pkey PRIMARY KEY (id),
+    CONSTRAINT city_user_authorities_id_fkey FOREIGN KEY (authorities_id)
+         REFERENCES public.authorities(id) 
+	  ON DELETE CASCADE 
+	  ON UPDATE CASCADE,
 )
 
 TABLESPACE pg_default;
@@ -60,8 +65,7 @@ ALTER TABLE public.city
 
 CREATE TABLE public.authorities
 (
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    city_user_id uuid NOT NULL DEFAULT uuid_generate_v4() REFERENCES city_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),    
     authority character varying(50) COLLATE pg_catalog."default" NOT NULL
 );
 
