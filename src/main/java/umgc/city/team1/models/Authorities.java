@@ -1,15 +1,14 @@
 package umgc.city.team1.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "authorities")
 public class Authorities {
@@ -18,10 +17,11 @@ public class Authorities {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_user_id", nullable = false)
-    private CityUser cityUser;
-
+    @NotNull
     @Column(name="authority")
     private String authority;
+
+    public Authorities(String authority){
+        this.authority = authority;
+    }
 }

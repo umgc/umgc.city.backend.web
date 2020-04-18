@@ -2,39 +2,51 @@ spring:
   application:
     name: UMGC City Application
   profiles:
-    active: dev
+    active: prod
   datasource:
     driver-class-name: org.postgresql.Driver
     hikari:
-      pool-name: UMGCityHikariConnPool
+      pool-name: UMGCCityHikariConnPool
       connection-timeout: 20000
       minimum-idle: 2
       maximum-pool-size: 4
       idle-timeout: 300000
       max-lifetime: 1200000
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
-    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+  freemarker:
+    template-loader-path: classpath:/template
+    content-type: text/html
+    suffix: .ftl
+
   h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /city-zoning-project-management
 
 server:
   port: 5000
 
-management:
-  health:
-    db:
-      enabled: true
-    ldap:
-      enabled: false
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      base-path: /order/invoice/
-      exposure:
-        include: health
+email:
+  apiKey: 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
+  host: smtp.sendgrid.net
+  port: 587
+  username: apikey
+
+
+
+

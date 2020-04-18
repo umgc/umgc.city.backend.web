@@ -2,22 +2,19 @@ package umgc.city.team1.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import java.util.UUID;
 
 @ResponseStatus(value= HttpStatus.NOT_FOUND)
-public class ZoneNotFoundException extends Exception {
-    public ZoneNotFoundException(){
+public class UseCaseNotFoundException extends Exception {
+    public UseCaseNotFoundException(){
         super();
     }
-    public ZoneNotFoundException(String message){
+    public UseCaseNotFoundException(String message){
         super(message);
     }
-    public ZoneNotFoundException(Throwable e){
+    public UseCaseNotFoundException(Throwable e){
         super(e);
     }
-    public ZoneNotFoundException(String message, Throwable e){
+    public UseCaseNotFoundException(String message, Throwable e){
         super(message, e);
     }
 }
-
-

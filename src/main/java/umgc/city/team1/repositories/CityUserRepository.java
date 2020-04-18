@@ -1,17 +1,17 @@
 package umgc.city.team1.repositories;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import umgc.city.team1.models.City;
 import umgc.city.team1.models.CityUser;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface CityUserRepository extends JpaRepository<CityUser, UUID> {
+    List<CityUser> findByEmailAddress(String emailAddress);
+    List<CityUser> findByFirstNameAndLastName(String firstName, String lastName);
 }
 
 
