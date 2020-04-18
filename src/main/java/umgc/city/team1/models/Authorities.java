@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "authorities")
 public class Authorities {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uuid")
