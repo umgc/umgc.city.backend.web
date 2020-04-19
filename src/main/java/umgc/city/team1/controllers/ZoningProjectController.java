@@ -14,6 +14,7 @@ import umgc.city.team1.models.Zone;
 import umgc.city.team1.models.incoming.UseCaseDto;
 import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.repositories.ZoneLandUseRepository;
+import umgc.city.team1.repositories.ZoneRepository;
 import umgc.city.team1.services.ZoningProjectService;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class ZoningProjectController {
     private final Logger logger = LoggerFactory.getLogger(ZoningProjectController.class);
     private ZoningProjectService zoningProjectService;
     private ZoneLandUseRepository zoneLandUseRepository;
+    private ZoneRepository zoneRepository;
 
     public ZoningProjectController(ZoningProjectService zoningProjectService,
-                                   ZoneLandUseRepository zoneLandUseRepository) {
+                                   ZoneLandUseRepository zoneLandUseRepository, ZoneRepository zoneRepository) {
         this.zoningProjectService = zoningProjectService;
         this.zoneLandUseRepository = zoneLandUseRepository;
+        this.zoneRepository = zoneRepository;
     }
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
@@ -61,7 +64,7 @@ public class ZoningProjectController {
 
     @GetMapping(value = "/cities/zones/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Zone> getZoneById(@PathVariable("id") UUID zoneId) throws ZoneNotFoundException {
-        return new ResponseEntity<>(zoningProjectService.getZonesById(zoneId), HttpStatus.FOUND);
+        return new ResponseEntity<>(zoneRepository.getZoneById(zoneId), HttpStatus.FOUND);
     }
 
     @GetMapping(value = "/cities/zones/{id}/allowedlanduses", produces = MediaType.APPLICATION_JSON_VALUE)

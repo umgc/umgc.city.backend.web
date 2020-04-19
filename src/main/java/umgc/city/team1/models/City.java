@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -34,7 +33,7 @@ public class City implements Serializable {
     @JoinColumn(name = "city_user_id", referencedColumnName = "id")
     @JsonIgnore
     private CityUser cityUser;
-
+    
     public City(String name, String state, CityUser cityUser){
         this.name = name;
         this.state = state;

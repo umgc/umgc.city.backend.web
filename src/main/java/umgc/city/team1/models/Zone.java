@@ -30,8 +30,8 @@ public class Zone implements Serializable {
     @NotNull
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "city_id",  referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private City city;
@@ -42,5 +42,9 @@ public class Zone implements Serializable {
         this.city = city;
     }
 
-    public Zone(Zone zone) {}
+    public Zone(String zoneSymbol, String description){
+        this.zoneSymbol = zoneSymbol;
+        this.description = description;
+    }
+
 }
