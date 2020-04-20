@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -19,9 +20,14 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public SecurityConfiguration(DataSource dataSource) throws SQLException {
         this.dataSource = dataSource;    }
-    @Bean
+
+    /*@Bean
     public PasswordEncoder passwordEncoder(){
        return new BCryptPasswordEncoder();
+    } */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

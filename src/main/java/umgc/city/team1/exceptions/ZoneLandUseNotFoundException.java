@@ -18,4 +18,7 @@ public class ZoneLandUseNotFoundException extends Exception {
     public ZoneLandUseNotFoundException(String message, Throwable e){
         super(message, e);
     }
+
+    public ZoneLandUseNotFoundException(UUID uuid) {
+    }
 }
