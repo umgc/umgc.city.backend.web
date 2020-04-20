@@ -2,14 +2,11 @@ package umgc.city.team1.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umgc.city.team1.exceptions.*;
-import umgc.city.team1.models.AllowedLandUse;
 import umgc.city.team1.models.Zone;
 import umgc.city.team1.models.incoming.UseCaseDto;
 import umgc.city.team1.models.incoming.UserAccount;
@@ -40,7 +37,8 @@ public class ZoningProjectController {
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> createUserAccount(@RequestBody UserAccount userAccount) throws ObjectCreationFailedException {
-        return ResponseEntity.ok( zoningProjectService.createUserAccount(userAccount));
+        zoningProjectService.createUserAccount(userAccount);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
@@ -54,7 +52,7 @@ public class ZoningProjectController {
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> editUseCase(@RequestBody UseCaseDto useCase) throws UseCaseNotFoundException {
         zoningProjectService.editUseCase(useCase);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "/cities/{id}/zones", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -63,15 +61,8 @@ public class ZoningProjectController {
     }
 
     @GetMapping(value = "/cities/zones/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Zone> getZoneById(@PathVariable("id") UUID zoneId) throws ZoneNotFoundException {
+    public ResponseEntity<Zone> getZoneById(@PathVariable("id") UUID zoneId) {
         return new ResponseEntity<>(zoneRepository.getZoneById(zoneId), HttpStatus.FOUND);
-    }
-
-    @GetMapping(value = "/cities/zones/{id}/allowedlanduses", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<AllowedLandUse>> getAllowedLandUsesByZoneId(@PathVariable("id") UUID zoneId,
-                                                                           Pageable pageable) throws AllowedLandUseNotFoundException {
-        return new ResponseEntity<>(zoningProjectService.getAllowedLandUsesByZoneId(zoneId,
-                pageable), HttpStatus.FOUND);
     }
 
     @GetMapping(value = "/cities/zones/{id}/usecases", produces = MediaType.APPLICATION_JSON_VALUE)

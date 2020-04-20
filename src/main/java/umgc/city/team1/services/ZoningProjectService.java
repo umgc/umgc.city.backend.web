@@ -8,9 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import umgc.city.team1.config.MailProperties;
@@ -41,7 +38,7 @@ public class ZoningProjectService {
     private  final MailProperties mailProperties;
     private Configuration freemarkerConfig;
 
-    public HttpStatus createUserAccount(UserAccount userAccount) throws ObjectCreationFailedException {
+    public void createUserAccount(UserAccount userAccount) throws ObjectCreationFailedException {
         try {
             cityRepository.save(new City(userAccount.getCity(), userAccount.getState(),
                     cityUserRepository.save(new CityUser(userAccount.getFirstName(), userAccount.getLastName(),
@@ -49,18 +46,11 @@ public class ZoningProjectService {
         }catch (Exception e){
             throw new ObjectCreationFailedException(e);
         }
-        return HttpStatus.CREATED;
     }
 
     public List<Zone> getZonesByCityId(UUID cityId) throws ZoneNotFoundException {
         return Optional.of(zoneRepository.findAllByCity(cityId))
                 .orElseThrow(() -> new ZoneNotFoundException("Zones were not found with city id" + cityId));
-    }
-
-    public Page<AllowedLandUse> getAllowedLandUsesByZoneId(UUID zoneId, Pageable pageable) throws AllowedLandUseNotFoundException {
-        return Optional.of(allowedLandUseRepository.findByZoneId(zoneId,
-                pageable)).orElseThrow(() -> new AllowedLandUseNotFoundException("Zones could not be found for city " +
-                "with Id: " + zoneId));
     }
 
     public List<UseCaseDto> getUseCasesByZone(UUID zoneId) throws UseCaseNotFoundException {
@@ -121,9 +111,6 @@ public class ZoningProjectService {
     }
 
     public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseNotFoundException {
-//        City city = new City(Optional.ofNullable(getCityById(useCaseDto.getCityId()))
-//                .orElseThrow(() -> new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found")));
-
         Optional<City> cityOptional = getCityById(useCaseDto.getCityId());
         if(cityOptional.isEmpty())
             throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found");
