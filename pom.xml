@@ -10,6 +10,7 @@
     </parent>
     <groupId>umgc.city</groupId>
     <artifactId>team1</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>team1</name>
     <description>UMGC City Team 1: Java Service</description>
@@ -168,15 +169,6 @@
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>2.2.0</version>
-                <configuration>
-                    <to>
-                        <image>docker.io/umgccaps/umgc.city.server.api-${project.version}</image>
-                        <auth>
-                            <username>${env.DOCKER_USER}</username>
-                            <password>${env.DOCKER_AUTH}</password>
-                        </auth>
-                    </to>
-                </configuration>
             </plugin>
         </plugins>
     </build>
