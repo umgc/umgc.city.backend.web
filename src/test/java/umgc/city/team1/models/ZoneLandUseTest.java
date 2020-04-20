@@ -34,15 +34,18 @@ class ZoneLandUseTest {
         }
     }
 
-//    @Test
-//    public void testCityIdSetAndGetId() {
-//        ZoneLandUse zoneLandUse = new ZoneLandUse();
-//        UUID uuid = UUID.randomUUID();
-//        try {
-//            zoneLandUse.setCityId(uuid);
-//            assertEquals(zoneLandUse.getCityId(),uuid);
-//        } catch (Exception e2) {
-//            fail("Threw exception when not expected one");
-//        }
-//    }
+    @Test
+    public void testZoneLandUseSetAndGetCity() {
+        ZoneLandUse zoneLandUse = new ZoneLandUse();
+        City city = new City();
+        String cityName = "cityName";
+        city.setName(cityName);
+        try {
+            zoneLandUse.setCity(city);
+            assertEquals(zoneLandUse.getCity(), city);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
+
 }

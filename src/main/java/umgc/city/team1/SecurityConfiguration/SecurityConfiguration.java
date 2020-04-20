@@ -6,8 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -18,11 +18,18 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     final DataSource dataSource;
 
     public SecurityConfiguration(DataSource dataSource) throws SQLException {
-        this.dataSource = dataSource;    }
-    @Bean
+        this.dataSource = dataSource;
+    }
+
+    /*@Bean
     public PasswordEncoder passwordEncoder(){
        return new BCryptPasswordEncoder();
+    } */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()

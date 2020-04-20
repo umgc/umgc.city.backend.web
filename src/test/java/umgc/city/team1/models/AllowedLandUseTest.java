@@ -37,16 +37,63 @@ class AllowedLandUseTest {
         }
     }
 
-//    @Test
-//    public void testAllowedLandUseSetAndGetZoneLaneUseId() {
-//        UUID
-//        AllowedLandUse allowedLandUse = new AllowedLandUse();
-//        UUID uuid = UUID.randomUUID();
-//        try {
-//            allowedLandUse.setZoneLaneUseId(uuid);
-//            assertEquals(allowedLandUse.getZoneLaneUseId(),uuid);
-//        } catch (Exception e2) {
-//            fail("Threw exception when not expected one");
-//        }
-//    }
+    @Test
+    public void testAllowedLandUseSetAndGetApplicationUrl() {
+        AllowedLandUse allowedLandUse = new AllowedLandUse();
+        String URL = "https://domain.anywhere/url";
+        try {
+            allowedLandUse.setApplicationUrl(URL);
+            assertEquals(allowedLandUse.getApplicationUrl(), URL);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
+
+    @Test
+    public void testAllowedLandUseSetAndGetPermitDescription() {
+        AllowedLandUse allowedLandUse = new AllowedLandUse();
+        String permitDescription = "permitDescription";
+        try {
+            allowedLandUse.setPermitDescription(permitDescription);
+            assertEquals(allowedLandUse.getPermitDescription(), permitDescription);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
+
+    @Test
+    public void testAllowedLandUseSetAndGetPermitName() {
+        AllowedLandUse allowedLandUse = new AllowedLandUse();
+        String permitName = "permitName";
+        try {
+            allowedLandUse.setPermitName(permitName);
+            assertEquals(allowedLandUse.getPermitName(), permitName);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
+
+    @Test
+    public void testAllowedLandUseSetAndGetZone() {
+        AllowedLandUse allowedLandUse = new AllowedLandUse();
+        Zone zone = new Zone();
+        try {
+            allowedLandUse.setZone(zone);
+            assertEquals(allowedLandUse.getZone(), zone);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
+
+    @Test
+    public void testAllowedLandUseSetAndGetZoneLandUse() {
+        AllowedLandUse allowedLandUse = new AllowedLandUse();
+        ZoneLandUse zoneLandUse = new ZoneLandUse();
+        try {
+            allowedLandUse.setZoneLandUse(zoneLandUse);
+            assertEquals(allowedLandUse.getZoneLandUse(), zoneLandUse);
+        } catch (Exception e2) {
+            fail("Threw exception when not expected one");
+        }
+    }
 }
