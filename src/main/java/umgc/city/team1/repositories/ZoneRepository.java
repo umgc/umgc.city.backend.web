@@ -13,9 +13,14 @@ import java.util.UUID;
 
 @Repository
 public interface ZoneRepository extends JpaRepository<Zone, UUID> {
+    @Query("SELECT z from Zone as z where z.id = :zoneId")
+    Zone getZoneById(@Param("zoneId") UUID zoneId);
 
     @Query("SELECT z from Zone as z where z.city.id = :cityId")
     List<Zone> findAllByCity(@Param("cityId") UUID cityId);
+
+    @Query("SELECT z from Zone as z where z.zoneSymbol = :zoneSymbol and z.city.id = :cityId")
+    Zone getZoneSymbolAndCityId(@Param("zoneSymbol") String zoneSymbol, @Param("cityId") UUID cityId);
 
     @Query("SELECT new umgc.city.team1.models.incoming.UseCaseDto(c.id, z.id, z.zoneSymbol, z.description, " +
             "alu.applicationUrl, alu.procedureUrl, alu.permitName, alu.permitDescription, " +
@@ -27,9 +32,6 @@ public interface ZoneRepository extends JpaRepository<Zone, UUID> {
             " INNER JOIN DevelopmentStandards as ds on ds.zone.id = z.id" +
             " WHERE z.id = :zoneId")
     List<UseCaseDto> findUseCaseByZoneId(@Param("zoneId") UUID zoneId);
-
-    @Query("SELECT z from Zone as z where z.zoneSymbol = :zoneSymbol and z.city.id = :cityId")
-    Optional<Zone> findBySymbol(@Param("zoneSymbol") String zoneSymbol, @Param("cityId") UUID cityId);
 
     @Query("SELECT new umgc.city.team1.models.incoming.UseCaseDto(c.id, z.id, z.zoneSymbol, z.description, " +
             "alu.applicationUrl, alu.procedureUrl, alu.permitName, alu.permitDescription, " +

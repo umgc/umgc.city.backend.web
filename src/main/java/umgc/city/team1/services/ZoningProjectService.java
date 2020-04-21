@@ -63,11 +63,6 @@ public class ZoningProjectService {
                 "with Id: " + zoneId));
     }
 
-    public Zone getZonesById(UUID zoneId) throws ZoneNotFoundException {
-        return Optional.of(this.zoneRepository.getOne(zoneId))
-                .orElseThrow(() -> new ZoneNotFoundException("Zone could not be found with Id:" + zoneId));
-    }
-
     public List<UseCaseDto> getUseCasesByZone(UUID zoneId) throws UseCaseNotFoundException {
         return Optional.of(zoneRepository.findUseCaseByZoneId(zoneId)).orElseThrow(() -> new UseCaseNotFoundException(
                 "Land Use Cases could not be found for zone with Id: " + zoneId));
@@ -117,10 +112,6 @@ public class ZoningProjectService {
                 .orElseThrow(() -> new CityNotFoundException("City with id " + cityId + " not found"));
     }
 
-    private Optional<Zone> getZoneBySymbol(String zoneSymbol, UUID cityId) {
-        return this.zoneRepository.findBySymbol(zoneSymbol, cityId);
-    }
-
     private Optional<ZoneLandUse> getZoneLandUseByDescription(String zoneLandUseDescription, UUID cityId) {
         return this.zoneLandUseRepository.findByZoneLandUseByDescription(zoneLandUseDescription, cityId);
     }
@@ -130,12 +121,18 @@ public class ZoningProjectService {
     }
 
     public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseNotFoundException {
-        City city = new City(Optional.ofNullable(getCityById(useCaseDto.getCityId()))
-                .orElseThrow(() -> new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found")));
+//        City city = new City(Optional.ofNullable(getCityById(useCaseDto.getCityId()))
+//                .orElseThrow(() -> new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found")));
+
+        Optional<City> cityOptional = getCityById(useCaseDto.getCityId());
+        if(cityOptional.isEmpty())
+            throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found");
+        City city = cityOptional.get();
 
         //Get zone by zone symbol
         Zone zone;
-        Optional<Zone> zoneOptional = getZoneBySymbol(useCaseDto.getZoneSymbol(), city.getId());
+        Optional<Zone> zoneOptional = Optional.ofNullable(zoneRepository.
+                getZoneSymbolAndCityId(useCaseDto.getZoneSymbol(), city.getId()));
         zone = zoneOptional.orElseGet(() -> new Zone(useCaseDto.getZoneSymbol(), useCaseDto.getZoneDescription(),
                 city));
             zoneRepository.save(zone);
