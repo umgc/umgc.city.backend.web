@@ -17,12 +17,17 @@ import java.sql.SQLException;
 class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     final DataSource dataSource;
 
+    /* Assign datasource which located in application-dev.yml */
     public SecurityConfiguration(DataSource dataSource) throws SQLException {
         this.dataSource = dataSource;    }
+
+     /*Encode the raw password using PasswordEncoder */
     @Bean
     public PasswordEncoder passwordEncoder(){
        return new BCryptPasswordEncoder();
     }
+
+    /*Get username, password, and authority from database tables */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
@@ -35,17 +40,22 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         + "where email_address = ?");
     }
 
+
+    /*Authenticated users who access /admin/ and /admin/* paths */
     @Override
     protected  void configure(HttpSecurity http) throws Exception {
         /* Permit access to all pages                      */
         /* Authenticate access to admin page and sub pages */
         http.authorizeRequests()
                 .antMatchers("/admin/**").authenticated()
-                .antMatchers("/**").permitAll().and().formLogin();
+                .antMatchers("/**").permitAll()
+                .and()
+                .formLogin();  // Create a login form
 
         /* Create logout page */
         http.logout();
 
+        /* Disable Cross Site Request Forgery */
         http.csrf().disable();
     }
 }
