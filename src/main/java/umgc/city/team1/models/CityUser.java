@@ -50,7 +50,7 @@ public class CityUser implements Serializable {
     @Column(name="authorities_id")
     private UUID authoritiesId;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade =  CascadeType.ALL,
             mappedBy = "cityUser")
     @JsonIgnore
@@ -66,14 +66,16 @@ public class CityUser implements Serializable {
         this.authoritiesId = authoritiesId;
     }
 
-    public String getPassword() {
-        return decrypt(password, secretKey);
-    }
+//    public String getPassword() {
+//        return decrypt(password, secretKey);
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = encrypt(password, secretKey);
+//        ;
+//    }
 
-    public void setPassword(String password) {
-        this.password = encrypt(password, secretKey);
-        ;
-    }
+
 
     private static String secretKey = "boooooooooom!!!!";
     private static String salt = "ssshhhhhhhhhhh!!!!";

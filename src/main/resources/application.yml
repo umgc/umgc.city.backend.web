@@ -46,6 +46,7 @@ email:
   host: smtp.sendgrid.net
   port: 587
   username: apikey
+  endpoint: mail/send
 
 
 
