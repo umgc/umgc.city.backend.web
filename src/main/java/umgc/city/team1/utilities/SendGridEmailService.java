@@ -1,52 +1,67 @@
 package umgc.city.team1.utilities;
 
 import com.sendgrid.*;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import umgc.city.team1.exceptions.EmailException;
-import umgc.city.team1.models.outgoing.EmailInfo;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import umgc.city.team1.config.MailProperties;
+import umgc.city.team1.models.CityUser;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Data
+
 public class SendGridEmailService {
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
+    private final MailProperties mailProperties;
+    private final Configuration freeMakerConfiguration;
 
-    public void sendEmail(EmailInfo email, String sendGridAPIKey) throws EmailException {
+    @Autowired
+    public SendGridEmailService(Configuration freeMakerConfiguration, MailProperties mailProperties){
+        this.freeMakerConfiguration = freeMakerConfiguration;
+        this.mailProperties = mailProperties;
+    }
 
+
+    public void sendEmail(CityUser cityUser) throws IOException, TemplateException {
+        Map<String, Object> model = new HashMap<>();
+        model.put("name", cityUser.getFirstName() + " " + cityUser.getLastName());
+        model.put("emailAddress", cityUser.getEmailAddress());
+        model.put("password", cityUser.getPassword());
+        model.put("host", mailProperties.getHomeURL());
+
+        freeMakerConfiguration.setClassForTemplateLoading(this.getClass(), "/template");
+        Template t = freeMakerConfiguration.getTemplate("email-template.ftl");
+        String htmlBody = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
+
+        Email senderEmail = new Email(Constants.EMAIL_SENDER);
+        Email recipientEmail = new Email(cityUser.getEmailAddress());
+        Content content = new Content(Constants.EMAIL_CONTENT_TYPE, htmlBody );
         //Populate SendGrid required parameters
-        Email senderEmail = new Email(email.getSenderEmail(), email.getSenderName());
+        Mail mail = new Mail(senderEmail, Constants.EMAIL_SUBJECT, recipientEmail, content);
 
-        Email recipientEmail = new Email(email.getRecipientEmail(), email.getRecipientName());
-
-        Content content = new Content(email.getContentType(), email.getBody());
-
-        Mail mail = new Mail(senderEmail, email.getSubject(), recipientEmail, content);
-
+        SendGrid sg = new SendGrid(mailProperties.getApiKey());
         Request request = new Request();
-
-        try {
-            request.setMethod(Method.POST);
-
-            request.setEndpoint(Constants.REQUEST_ENDPOINT);
-
-            request.setBody(mail.build());
-
-            //Get SendGrid response
-            SendGrid sendGridClient = new SendGrid(sendGridAPIKey);
-            Response response = sendGridClient.api(request);
-
-            //SendGrid's sent emails come back with a status code of 202 or 200
-            if (response.getStatusCode() != 202 || response.getStatusCode() !=200) {
-                throw new EmailException("Email Failed: " + response.getStatusCode());
-            }
-        } catch (IOException | EmailException ex) {
-            logger.error(ex.getMessage());
-            throw new EmailException("Email Failed:" + HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        request.setMethod(Method.POST);
+        request.setEndpoint(mailProperties.getEndpoint());
+        request.setBody(mail.build());
+        Response response = sg.api(request);
+        System.out.println(response.getStatusCode());
+        System.out.println(response.getBody());
+        System.out.println(response.getHeaders());
     }
 }
+
+
+

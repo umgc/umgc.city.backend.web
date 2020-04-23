@@ -5,6 +5,8 @@ target/
 !**/src/test/**
 
 ### STS ###
+.DS_Store
+.vscode
 .apt_generated
 .classpath
 .factorypath
