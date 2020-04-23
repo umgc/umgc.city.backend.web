@@ -3,7 +3,9 @@ package umgc.city.team1.models;
 
 import lombok.Data;
 import org.junit.jupiter.api.Test;
+
 import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -34,7 +36,7 @@ class DevelopmentStandardsTest {
     }
 
     @Test
-    public void testDevelopmentStandardsSetAndGetZZZZ() {
+    public void testDevelopmentStandardsSetAndGet() {
         DevelopmentStandards developmentStandards = new DevelopmentStandards();
         String URL = "https://domain.anywhere/url";
         try {
