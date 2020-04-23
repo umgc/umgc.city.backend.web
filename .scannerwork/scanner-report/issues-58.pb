@@ -1,0 +1,2 @@
+=
+javaS1214"Move constants to a class or enum. 2 

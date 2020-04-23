@@ -1,0 +1,35 @@
+SonarQube plugins:
+  - SonarPython 2.5.0.5733 (python)
+  - SonarCSS 1.2.0.1325 (cssfamily)
+  - JaCoCo 1.0.2.475 (jacoco)
+  - SonarGo 1.6.0.719 (go)
+  - SonarKotlin 1.5.0.315 (kotlin)
+  - Svn 1.9.0.1295 (scmsvn)
+  - SonarJS 6.2.0.12043 (javascript)
+  - SonarRuby 1.5.0.315 (ruby)
+  - SonarScala 1.5.0.315 (sonarscala)
+  - SonarC# 8.4.0.15306 (csharp)
+  - SonarJava 6.1.0.20866 (java)
+  - SonarHTML 3.2.0.2082 (web)
+  - Git 1.9.1.1834 (scmgit)
+  - SonarFlex 2.5.1.1831 (flex)
+  - SonarXML 2.0.1.2020 (xml)
+  - SonarPHP 3.3.0.5166 (php)
+  - SonarTS 2.1.0.4359 (typescript)
+  - SonarVB 8.4.0.15306 (vbnet)
+Global server settings:
+  - sonar.core.id=BF41A1F2-AXGfOyw8s7yiCbAO20A-
+  - sonar.core.startTime=2020-04-21T22:10:28-0400
+Project server settings:
+Project scanner properties:
+  - sonar.host.url=http://localhost:9000
+  - sonar.java.binaries=C:\Users\Christy\Documents\School\SWEN 670\umgc.city.backend.web\.mvn\wrapper
+  - sonar.login=******
+  - sonar.projectBaseDir=C:\Users\Christy\Documents\School\SWEN 670\umgc.city.backend.web
+  - sonar.projectKey=UMGC-City
+  - sonar.scanner.app=ScannerCli
+  - sonar.scanner.appVersion=4.2.0.1873
+  - sonar.sourceEncoding=windows-1252
+  - sonar.sources=.
+  - sonar.verbose=true
+  - sonar.working.directory=C:\Users\Christy\Documents\School\SWEN 670\umgc.city.backend.web\.scannerwork

@@ -1,0 +1,2 @@
+E
+javaS1068*Remove this unused "logger" private field. 2"" 

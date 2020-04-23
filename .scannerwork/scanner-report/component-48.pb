@@ -1,0 +1,1 @@
+0 2javaXhrHsrc/main/java/umgc/city/team1/repositories/AllowedLandUseRepository.java
