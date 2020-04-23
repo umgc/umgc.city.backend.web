@@ -28,7 +28,7 @@
             <td bgcolor="white" style="padding: 40px 30px 40px 30px;">
                 <p>Dear ${name},</p>
               <p>Here are the user login credentials that you requested to gain access to the <a href="${host}/home">UMGC City Zoning Admin Portal</a>.</p>
-              <p><b>Username:</b> ${emailaddress}</p>
+              <p><b>Username:</b> ${emailAddress}</p>
               <p><b>Password:</b> ${password}</p>
               <br>
                 <p>Thanks</p>
@@ -45,3 +45,4 @@
         </tr>
     </table>
 </body>
+</html>
