@@ -1,4 +1,4 @@
-package umgc.city.team1.models.smoke;
+package umgc.city.team1.smoke;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
