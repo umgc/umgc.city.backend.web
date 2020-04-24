@@ -6,12 +6,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.AbstractPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 
 @EnableWebSecurity
 @Configuration
@@ -19,7 +17,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     final DataSource dataSource;
 
     /* Assign datasource which located in application-dev.yml */
-    public SecurityConfiguration(DataSource dataSource) throws SQLException {
+    public SecurityConfiguration(DataSource dataSource) {
         this.dataSource = dataSource;    }
 
      /*Encode the raw password using PasswordEncoder */
@@ -30,7 +28,17 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     } */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new StandardPasswordEncoder();
+        return new AbstractPasswordEncoder() {
+            @Override
+            protected byte[] encode(CharSequence charSequence, byte[] bytes) {
+                return new byte[0];
+            }
+
+            @Override
+            public boolean upgradeEncoding(String encodedPassword) {
+                return false;
+            }
+        };
     }
 
     /*Get username, password, and authority from database tables */
