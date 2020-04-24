@@ -15,7 +15,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The application has automated testing hosted through Github Actions ... see .github/workflows for workflow actions.
 
-For Code Coverage Report view the [Sonar Dashboard](https://sonarcloud.io/dashboard?id=umgc_umgc.city.backend)
+For Code Coverage Report view the [Sonar Dashboard](https://sonarcloud.io/dashboard?id=umgc-city-backend)
 
 The project is stage at [UMGC Web Staging](https://appdev-umgc-cityapi.herokuapp.com/)
 
