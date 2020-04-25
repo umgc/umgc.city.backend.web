@@ -87,14 +87,15 @@ public class ZoningProjectController {
         return new ResponseEntity<>(zoningProjectService.getUseCasesByCity(cityId), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/pasadena/zones", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/pasadena/zones", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MapCase> getPasadenaZoneData(@RequestBody MapShape mapShape) throws ZoneNotFoundException {
         return new ResponseEntity<>(zoningProjectService.getPasadenaZoneData(mapShape), HttpStatus.OK);
     }
 
 
     @PostMapping(value = "/users/sendCredentials", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws EmailException,
+    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws
             IOException, TemplateException {
         zoningProjectService.sendAdminUserCredentialsInEmail(userAccount);
         return new ResponseEntity<>(HttpStatus.OK);

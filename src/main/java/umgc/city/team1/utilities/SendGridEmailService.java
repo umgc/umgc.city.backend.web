@@ -15,6 +15,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import umgc.city.team1.config.MailProperties;
 import umgc.city.team1.models.CityUser;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
