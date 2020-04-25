@@ -39,7 +39,7 @@ management:
       base-path: /city-zoning-project-management
 
 server:
-  port: 5000
+  port: ${PORT:8080}
 
 email:
   apiKey: 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
