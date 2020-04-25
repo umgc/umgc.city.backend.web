@@ -240,15 +240,16 @@ public class ZoningProjectService {
                 mapCase.setOverlayGeneralStandardsURL("https://library.municode" +
                         ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17" +
                         ".28OVZODI");
+            } else {
+                MapZone overlayZoneOptional =
+                        Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
+                                new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " not found"));
+                mapCase.setOverlayCode(overlayZoneOptional.getZoneSymbol());
+                mapCase.setOverlayCodeDescription(overlayZoneOptional.getZoneSymbol());
+                mapCase.setOverlayGeneralStandardsURL(overlayZoneOptional.getGeneralStandardsURL());
+                mapCase.setOverlayAdditionalStandardsURL(overlayZoneOptional.getAdditionalStandardsURL());
+                mapCase.setOverlayFrontageAndFacadesStandards(overlayZoneOptional.getFrontageAndFacadesStandardsURL());
             }
-            MapZone overlayZoneOptional =
-                    Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
-                            new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " not found"));
-            mapCase.setOverlayCode(overlayZoneOptional.getZoneSymbol());
-            mapCase.setOverlayCodeDescription(overlayZoneOptional.getZoneSymbol());
-            mapCase.setOverlayGeneralStandardsURL(overlayZoneOptional.getGeneralStandardsURL());
-            mapCase.setOverlayAdditionalStandardsURL(overlayZoneOptional.getAdditionalStandardsURL());
-            mapCase.setOverlayFrontageAndFacadesStandards(overlayZoneOptional.getFrontageAndFacadesStandardsURL());
         }
         return mapCase;
     }

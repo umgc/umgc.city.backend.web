@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MapShape {
-    private String shape;
-    private String id;
     private String codeLabel;
     private String zoneCode;
     private String overlayCode;
-    private String coords;
 }
