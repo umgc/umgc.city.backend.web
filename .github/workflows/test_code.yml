@@ -66,6 +66,6 @@ jobs:
         env: 
           SONAR_TOKEN: ${{secrets.SONAR_UMGCCITY_WEB}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=umgc.city.team1 -Dsonar.organization=umgc -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=umgc-city-backend -Dsonar.organization=umgc -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
     

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umgc.city.team1.exceptions.*;
+import umgc.city.team1.models.CityUser;
 import umgc.city.team1.models.Zone;
 import umgc.city.team1.models.incoming.MapShape;
 import umgc.city.team1.models.incoming.UseCaseDto;
@@ -42,9 +43,14 @@ public class ZoningProjectController {
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> createUserAccount(@RequestBody UserAccount userAccount) throws ObjectCreationFailedException {
-        zoningProjectService.createUserAccount(userAccount);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<CityUser> createUserAccount(@RequestBody UserAccount userAccount) throws ObjectCreationFailedException {
+        return new ResponseEntity<>(zoningProjectService.createUserAccount(userAccount), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserAccount> VerifyUserAccount(@RequestBody UserAccount userAccount) throws CityUserNotFoundException {
+        return new ResponseEntity<UserAccount>(zoningProjectService.VerifyUserAccount(userAccount), HttpStatus.OK);
     }
 
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =

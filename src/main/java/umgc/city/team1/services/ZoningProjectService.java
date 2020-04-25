@@ -34,17 +34,41 @@ public class ZoningProjectService {
     private ZoneLandUseRepository zoneLandUseRepository;
     private AllowedLandUseRepository allowedLandUseRepository;
     private DevelopmentStandardsRepository developmentStandardsRepository;
+    private final AuthoritiesRepository authoritiesRepository;
     private SendGridEmailService sendGridEmailService;
 
 
-    public void createUserAccount(UserAccount userAccount) throws ObjectCreationFailedException {
+    public CityUser createUserAccount(UserAccount userAccount) throws ObjectCreationFailedException {
         try {
+            Authorities authorities = authoritiesRepository.getAuthorityByName("City_Official");
+            CityUser cityUser = new CityUser(userAccount.getFirstName(), userAccount.getLastName(), userAccount.getEmail(), userAccount.getPassword(), authorities.getId());
             cityRepository.save(new City(userAccount.getCity(), userAccount.getState(),
-                    cityUserRepository.save(new CityUser(userAccount.getFirstName(), userAccount.getLastName(),
-                            userAccount.getEmail(), userAccount.getPassword(), userAccount.getAuthoritiesId()))));
-        } catch (Exception e) {
+                    cityUserRepository.save(cityUser)));
+            return cityUser;
+        }catch (Exception e){
             throw new ObjectCreationFailedException(e);
         }
+    }
+
+    public UserAccount VerifyUserAccount(UserAccount userAccount) throws CityUserNotFoundException {
+        try {
+            CityUser cityUser;
+            if (!userAccount.getEmail().isEmpty()) {
+                cityUser = cityUserRepository.getUserByEmail(userAccount.getEmail());
+                if (cityUser == null ) throw new CityUserNotFoundException(userAccount.getEmail());
+
+                if (!cityUser.getPassword().equals(userAccount.getPassword())) throw new CityUserNotFoundException(userAccount.getEmail());
+
+                UserAccount existingUser = new UserAccount();
+                existingUser.setEmail(cityUser.getEmailAddress());
+                existingUser.setCity(cityUser.getCity().getId().toString());
+                return existingUser;
+            }
+        } catch (Exception e){
+            throw new CityUserNotFoundException(userAccount.getEmail());
+        }
+
+        return null;
     }
 
     public List<Zone> getZonesByCityId(UUID cityId) throws ZoneNotFoundException {
