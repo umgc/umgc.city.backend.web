@@ -3,6 +3,7 @@ package umgc.city.team1.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/* Custom exception for email not found */
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 public class EmailException extends Exception {
     public EmailException() {

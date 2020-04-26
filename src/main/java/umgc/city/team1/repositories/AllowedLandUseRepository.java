@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/* Returns data from Allowed Land Use table */
 @Repository
 public interface AllowedLandUseRepository extends JpaRepository<AllowedLandUse, UUID> {
     Page<AllowedLandUse> findByZoneId(UUID zoneId, Pageable pageable);

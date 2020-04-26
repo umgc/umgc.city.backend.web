@@ -1,13 +1,14 @@
 package umgc.city.team1;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class Team1ApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
+        //Placeholder implemented by SpringBoot
     }
 
 }

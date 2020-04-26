@@ -4,7 +4,6 @@ package umgc.city.team1.exceptions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -13,10 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ExceptionResponse {
 
-        private String message;
-        private Date timestamp;
-        private String requestedURI;
-        private String status;
-        private String error;
-    }
+        public ExceptionResponse(String messageInc, Date dateNowInc, String uriInc, String statusInc, String errorInc) {
+        }
+}
 

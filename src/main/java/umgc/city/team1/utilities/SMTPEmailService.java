@@ -8,7 +8,6 @@ import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.MailerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import umgc.city.team1.config.MailProperties;
 import umgc.city.team1.models.outgoing.EmailInfo;
@@ -25,7 +24,7 @@ public class SMTPEmailService {
 
     public void sendEmail(String senderEmail, String recipientEmail, String subject, String body) {
         //Construct EmailInfo object and redirect to sendEmail(emailInfo)
-        EmailInfo emailInfo = new EmailInfo();
+        EmailInfo emailInfo = new EmailInfo(recipientEmail, recipientName, senderEmail, senderName, subject, body, contentType);
 
         emailInfo.setSenderEmail(senderEmail);
 
@@ -38,7 +37,7 @@ public class SMTPEmailService {
     }
 
     private EmailStatus smtpEmailRelay(EmailInfo emailInfo) {
-        var emailStatus = new EmailStatus();
+        var emailStatus = new EmailStatus(isSent, errorMessage);
 
         try {
             //Populate SMTP required parameters
@@ -60,9 +59,7 @@ public class SMTPEmailService {
 
         } catch (Exception ex) {
             logger.error(ex.getMessage());
-
             emailStatus.setSent(false);
-
             emailStatus.setErrorMessage("Emailed failed to send. Error code: " + ex.getMessage());
         }
         return emailStatus;

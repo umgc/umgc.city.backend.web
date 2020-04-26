@@ -8,6 +8,7 @@ import umgc.city.team1.models.DevelopmentStandards;
 import java.util.Optional;
 import java.util.UUID;
 
+/* Returns data from Development standards table */
 @Repository
 public interface DevelopmentStandardsRepository extends JpaRepository<DevelopmentStandards, UUID> {
     @Query("SELECT dev from DevelopmentStandards as dev where dev.zone.id = :zoneId")

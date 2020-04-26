@@ -9,6 +9,7 @@ import umgc.city.team1.models.ZoneLandUse;
 import java.util.Optional;
 import java.util.UUID;
 
+/* Returns data from Zone Land Use table */
 @Repository
 public interface ZoneLandUseRepository extends JpaRepository<ZoneLandUse, UUID> {
     @Query("SELECT zlu from ZoneLandUse as zlu where zlu.description = :zoneLandUseDescription and zlu.city.id = :cityId")

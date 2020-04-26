@@ -3,7 +3,10 @@ package umgc.city.team1.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import umgc.city.team1.controllers.ZoningProjectController;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -12,7 +15,6 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.security.spec.KeySpec;
 import java.util.Base64;
@@ -24,7 +26,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "city_user")
 public class CityUser implements Serializable {
-
+    final static Logger logger = LoggerFactory.getLogger(ZoningProjectController.class);
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uuid")
@@ -66,17 +68,6 @@ public class CityUser implements Serializable {
         this.authoritiesId = authoritiesId;
     }
 
-//    public String getPassword() {
-//        return decrypt(password, secretKey);
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = encrypt(password, secretKey);
-//        ;
-//    }
-
-
-
     private static String secretKey = "boooooooooom!!!!";
     private static String salt = "ssshhhhhhhhhhh!!!!";
 
@@ -100,11 +91,11 @@ public class CityUser implements Serializable {
             SecretKey tmp = factory.generateSecret(spec);
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
 
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
+            logger.error("Error while decrypting: " + e.toString());
         }
         return null;
     }
@@ -128,13 +119,18 @@ public class CityUser implements Serializable {
             SecretKey tmp = factory.generateSecret(spec);
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
 
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
         } catch (Exception e) {
-            System.out.println("Error while encrypting: " + e.toString());
+            logger.error("Error while encrypting: " + e.toString());
         }
         return null;
     }
+
+    public Object getPassword() {
+        return password;
+    }
+
 }
 

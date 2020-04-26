@@ -2,6 +2,9 @@ package umgc.city.team1.models;
 
 import lombok.Data;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import umgc.city.team1.controllers.ZoningProjectController;
 
 import java.util.UUID;
 
@@ -10,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @Data
 class ZoneTest {
+
+    private String unexpectedExStr = "Threw exception when not expected one";
+    final static Logger logger = LoggerFactory.getLogger(ZoningProjectController.class);
+
     @Test
     public void testZoneSetAndGetId() {
         Zone zone = new Zone();
@@ -18,7 +25,8 @@ class ZoneTest {
             zone.setId(uuid);
             assertEquals(zone.getId(), uuid);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -30,7 +38,8 @@ class ZoneTest {
             zone.setDescription(description);
             assertEquals(zone.getDescription(), description);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
     @Test
@@ -41,7 +50,8 @@ class ZoneTest {
             zone.setZoneSymbol(symbol);
             assertEquals(zone.getZoneSymbol(), symbol);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -55,7 +65,8 @@ class ZoneTest {
             zone.setCity(city);
             assertEquals(zone.getCity().getName(), cityName);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.Date;
 
+/* Handlers for all custom exceptions */
 @RestControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 

@@ -2,6 +2,9 @@ package umgc.city.team1.models;
 
 import lombok.Data;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import umgc.city.team1.controllers.ZoningProjectController;
 
 import java.util.UUID;
 
@@ -10,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @Data
 class CityUserTest {
+
+    private String unexpectedExStr = "Threw exception when not expected one";
+    final static Logger logger = LoggerFactory.getLogger(ZoningProjectController.class);
+
     @Test
     public void testCityUserSetAndGetId() {
         CityUser cityUser = new CityUser();
@@ -18,7 +25,8 @@ class CityUserTest {
             cityUser.setId(uuid);
             assertEquals(cityUser.getId(), uuid);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -29,7 +37,8 @@ class CityUserTest {
             cityUser.setFirstName("ffname");
             assertEquals(cityUser.getFirstName(), "ffname");
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -40,7 +49,8 @@ class CityUserTest {
             cityUser.setLastName("llname");
             assertEquals(cityUser.getLastName(), "llname");
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -51,7 +61,7 @@ class CityUserTest {
             cityUser.setEmailAddress("email@email.email");
             assertEquals(cityUser.getEmailAddress(), "email@email.email");
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
         }
     }
 
@@ -63,7 +73,7 @@ class CityUserTest {
             cityUser.setCity(city);
             assertEquals(cityUser.getCity(), city);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
         }
     }
 
@@ -75,7 +85,8 @@ class CityUserTest {
             cityUser.setPassword(password);
             assertEquals(cityUser.getPassword(), password);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
 
         }
     }
@@ -88,7 +99,8 @@ class CityUserTest {
             cityUser.setAuthoritiesId(uuid);
             assertEquals(cityUser.getAuthoritiesId(), uuid);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 }

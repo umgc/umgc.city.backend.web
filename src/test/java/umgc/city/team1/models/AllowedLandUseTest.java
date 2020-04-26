@@ -1,15 +1,21 @@
 package umgc.city.team1.models;
 
 import lombok.Data;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import umgc.city.team1.controllers.ZoningProjectController;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @Data
 class AllowedLandUseTest {
+
+    public final static String unexpectedExStr = "Threw exception when not expected one";
+    final static Logger logger = LoggerFactory.getLogger(ZoningProjectController.class);
 
     @Test
     public void testAllowedLandUseSetAndGetId() {
@@ -19,7 +25,8 @@ class AllowedLandUseTest {
             allowedLandUse.setId(uuid);
             assertEquals(allowedLandUse.getId(), uuid);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -33,7 +40,8 @@ class AllowedLandUseTest {
         try {
             assertEquals(allowedLandUse.getZone().getId(), zoneId);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -45,7 +53,8 @@ class AllowedLandUseTest {
             allowedLandUse.setApplicationUrl(URL);
             assertEquals(allowedLandUse.getApplicationUrl(), URL);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -57,7 +66,8 @@ class AllowedLandUseTest {
             allowedLandUse.setPermitDescription(permitDescription);
             assertEquals(allowedLandUse.getPermitDescription(), permitDescription);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 
@@ -69,7 +79,8 @@ class AllowedLandUseTest {
             allowedLandUse.setPermitName(permitName);
             assertEquals(allowedLandUse.getPermitName(), permitName);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
     @Test
@@ -80,7 +91,8 @@ class AllowedLandUseTest {
             allowedLandUse.setZone(zone);
             assertEquals(allowedLandUse.getZone(), zone);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
     @Test
@@ -91,7 +103,8 @@ class AllowedLandUseTest {
             allowedLandUse.setZoneLandUse(zoneLandUse);
             assertEquals(allowedLandUse.getZoneLandUse(), zoneLandUse);
         } catch (Exception e2) {
-            fail("Threw exception when not expected one");
+            fail(unexpectedExStr);
+            logger.error(unexpectedExStr);
         }
     }
 }

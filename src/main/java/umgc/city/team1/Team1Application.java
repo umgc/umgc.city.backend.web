@@ -25,6 +25,7 @@ public class Team1Application extends SpringBootServletInitializer {
         return builder.sources(Team1Application.class);
     }
 
+    /* Creates new instantiation of application */
     public static void main(String[] args) {
         SpringApplication sa = new SpringApplication(
                 Team1Application.class);

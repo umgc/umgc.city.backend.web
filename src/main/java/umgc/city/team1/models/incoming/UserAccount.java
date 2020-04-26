@@ -2,7 +2,6 @@ package umgc.city.team1.models.incoming;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -23,8 +22,6 @@ public class UserAccount implements Serializable {
 
     private String password;
 
-    private UUID authoritiesId;
-
     public UserAccount(String firstName, String lastName, String email, String city, String state, String password,
                        UUID authoritiesId){
         this.firstName = firstName;
@@ -33,7 +30,6 @@ public class UserAccount implements Serializable {
         this.city = city;
         this.state = state;
         this.password = password;
-        this.authoritiesId = authoritiesId;
     }
 
     public UserAccount(String firstName, String lastName){
@@ -43,5 +39,37 @@ public class UserAccount implements Serializable {
 
     public UserAccount(String email){
         this.email = email;
+    }
+
+    public void setEmail() {
+        this.email = email;
+    }
+
+    public void setCity() {
+        this.city = city;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
     }
 }

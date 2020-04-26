@@ -1,10 +1,8 @@
 package umgc.city.team1.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -43,6 +41,7 @@ public class DevelopmentStandards implements Serializable {
     @JsonIgnore
     private Zone zone;
 
+    /* Creates a new record for developement standards */
     public DevelopmentStandards(String generalStandardsURL, String additionalStandardsURL,
                                 String gardenStandardsURL, String frontageAndFacadesStandardsURL, Zone zone){
         this.generalStandardsURL = generalStandardsURL;

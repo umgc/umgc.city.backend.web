@@ -18,11 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import umgc.city.team1.controllers.ZoningProjectController;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Authenticator;
+import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -88,14 +86,15 @@ public class MavenWrapperDownloader {
         downloadFileFromURL(url, outputFile);
             logger.info("Done");
             System.exit(0);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             logger.error("- Error downloading");
             logger.info("Citylog", e);
             System.exit(1);
         }
     }
 
-    private static void downloadFileFromURL(String urlString, File destination) throws Exception {
+    // Download Maven
+    private static void downloadFileFromURL(String urlString, File destination) throws MalformedURLException {
         if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
             String username = System.getenv("MVNW_USERNAME");
             char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
@@ -107,17 +106,20 @@ public class MavenWrapperDownloader {
             });
         }
         URL website = new URL(urlString);
-        ReadableByteChannel rbc;
-        rbc = Channels.newChannel(website.openStream());
-        try(FileOutputStream fos = new FileOutputStream(destination)) {
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-        } catch (Throwable e) {
-            logger.error("- Error downloading");
-            e.printStackTrace();
-            System.exit(1);
+
+        try(ReadableByteChannel rbc = Channels.newChannel(website.openStream())){
+            try (FileOutputStream fos = new FileOutputStream(destination)) {
+                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            } catch (FileNotFoundException e) {
+                logger.error("- Error downloading");
+                e.printStackTrace();
+                System.exit(1);
+            } catch (IOException e) {
+                logger.error(String.valueOf(e));
+                e.printStackTrace();
+            }
         }
 
-        rbc.close();
     }
 
 }
