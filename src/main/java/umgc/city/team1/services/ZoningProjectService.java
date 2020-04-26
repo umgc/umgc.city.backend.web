@@ -3,6 +3,7 @@ package umgc.city.team1.services;
 import freemarker.template.TemplateException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.models.outgoing.MapCase;
 import umgc.city.team1.models.outgoing.MapZone;
 import umgc.city.team1.repositories.*;
+import umgc.city.team1.utilities.Constants;
 import umgc.city.team1.utilities.SendGridEmailService;
 
 import java.io.IOException;
@@ -24,6 +26,7 @@ import java.util.UUID;
 @Service
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ZoningProjectService {
 
     private final Logger logger = LoggerFactory.getLogger(ZoningProjectService.class);
@@ -33,7 +36,7 @@ public class ZoningProjectService {
     private ZoneLandUseRepository zoneLandUseRepository;
     private AllowedLandUseRepository allowedLandUseRepository;
     private DevelopmentStandardsRepository developmentStandardsRepository;
-    private final AuthoritiesRepository authoritiesRepository;
+    private AuthoritiesRepository authoritiesRepository;
     private SendGridEmailService sendGridEmailService;
     private String notFoundStr = "not found";
     private String municodeBaseUrl = "https://library.municode";
@@ -53,7 +56,7 @@ public class ZoningProjectService {
                     cityUserRepository.save(cityUser)));
             return cityUser;
         }catch (Exception e){
-            logger.error(e);
+            logger.error(String.valueOf(e));
             throw new ObjectCreationFailedException(e);
         }
     }
@@ -122,7 +125,7 @@ public class ZoningProjectService {
 
     public Optional<City> getCityById(UUID cityId) throws CityNotFoundException {
         return Optional.of(this.cityRepository.findById(cityId))
-                .orElseThrow(() -> new CityNotFoundException("City with id " + cityId + " " + notFoundStr));
+                .orElseThrow(() -> new CityNotFoundException("City with id " + cityId + " " + Constants.NOT_FOUND));
     }
 
     private Optional<ZoneLandUse> getZoneLandUseByDescription(String zoneLandUseDescription, UUID cityId) {
@@ -136,7 +139,7 @@ public class ZoningProjectService {
     public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseNotFoundException {
         Optional<City> cityOptional = getCityById(useCaseDto.getCityId());
         if (cityOptional.isEmpty())
-            throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " " + notFoundStr);
+            throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " " + Constants.NOT_FOUND);
         City city = cityOptional.get();
 
         //Get zone by zone symbol
@@ -235,8 +238,8 @@ public class ZoningProjectService {
     public MapCase getPasadenaZoneData(MapShape mapShape) throws ZoneNotFoundException {
         MapZone baseZoneOptional =
                 Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
-                        new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " " + notFoundStr));
-        MapCase mapCase = new MapCase(codeLabel, baseCode, overlayCode, baseCodeDescription, overlayCodeDescription, baseGeneralStandardsURL, baseAdditionalStandardsURL, baseGardenStandard, baseFrontageAndFacadesStandards, overlayGeneralStandardsURL, overlayAdditionalStandardsURL, overlayGardenStandards, overlayFrontageAndFacadesStandards);
+                        new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " " + Constants.NOT_FOUND));
+        MapCase mapCase = new MapCase();
         mapCase.setCodeLabel(mapShape.getCodeLabel());
         mapCase.setBaseCode(mapShape.getZoneCode());
         mapCase.setBaseCodeDescription(baseZoneOptional.getDescription());
@@ -249,35 +252,35 @@ public class ZoningProjectService {
             if (mapShape.getOverlayCode().equals("PK-LD")) {
                 mapCase.setOverlayCode("PK-LD");
                 mapCase.setOverlayCodeDescription("Parking and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
-                        ch17URL +
-                        pageIdURL);
+                mapCase.setOverlayGeneralStandardsURL(Constants.MUNICODE_BASE_URL +
+                        Constants.CH17URL +
+                        Constants.PAGE_ID_URL);
             }
             if (mapShape.getOverlayCode().equals("OC-LD")) {
                 mapCase.setOverlayCode("OC-LD");
                 mapCase.setOverlayCodeDescription("Office Conversion Overlay District and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
-                        ch17URL +
-                        pageIdURL);
+                mapCase.setOverlayGeneralStandardsURL(Constants.MUNICODE_BASE_URL +
+                        Constants.CH17URL +
+                        Constants.PAGE_ID_URL);
             }
             if (mapShape.getOverlayCode().equals("HD-LD")) {
                 mapCase.setOverlayCode("HD-LD");
                 mapCase.setOverlayCodeDescription("Hillside Development (Residential) and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
-                        ch17URL +
-                        pageIdURL");
+                mapCase.setOverlayGeneralStandardsURL(Constants.MUNICODE_BASE_URL +
+                        Constants.CH17URL +
+                        Constants.PAGE_ID_URL);
             }
             if (mapShape.getOverlayCode().equals("OC-HL-1")) {
                 mapCase.setOverlayCode("OC-HL-1");
                 mapCase.setOverlayCodeDescription("Office Conversion (Multi-family Residential) and Landmark Overlay " +
                         "District");
-                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
-                        ch17URL +
-                        pageIdURL);
+                mapCase.setOverlayGeneralStandardsURL(Constants.MUNICODE_BASE_URL +
+                        Constants.CH17URL +
+                        Constants.PAGE_ID_URL);
             }
             MapZone overlayZoneOptional =
-                    Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
-                            new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " " + notFoundStr));
+                    Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getOverlayCode())).orElseThrow(() ->
+                            new ZoneNotFoundException("Zone with code: " + mapShape.getOverlayCode() + " " + Constants.NOT_FOUND));
             mapCase.setOverlayCode(overlayZoneOptional.getZoneSymbol());
             mapCase.setOverlayCodeDescription(overlayZoneOptional.getZoneSymbol());
             mapCase.setOverlayGeneralStandardsURL(overlayZoneOptional.getGeneralStandardsURL());
