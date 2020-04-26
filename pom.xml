@@ -171,7 +171,7 @@
                 <configuration>
                     <jdkVersion>11</jdkVersion>
                     <processTypes>
-                        <web>java -cp target/classes:target/dependency/* umgc.city.team1.Team1Application</web>
+                        <web>java  -Dspring.profiles.active=prod -cp target/classes:target/dependency/* umgc.city.team1.Team1Application</web>
                     </processTypes>
                 </configuration>
             </plugin>
