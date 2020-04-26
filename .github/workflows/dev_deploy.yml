@@ -34,7 +34,7 @@ jobs:
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_AUTH: ${{secrets.DOCKER_AUTH}}
-        run: mvn compile jib:build -Djib.to.auth.username=umgccaps -Djib.to.auth.password=$DOCKER_AUTH
+        run: mvn -e compile jib:build -Djib.to.auth.username=umgccaps -Djib.to.auth.password=$DOCKER_AUTH
 
   deploy-heroku:
     runs-on: ubuntu-latest
@@ -57,4 +57,4 @@ jobs:
       - name: Deploy to Heroku Dev
         env:
           HEROKU_API_KEY: ${{secrets.UMGC_HEROKU_API_KEY}}
-        run: mvn -e clean heroku:deploy -Dheroku.appName=appdev-umgc-cityapi
+        run: mvn -Dmaven.test.skip=true -e clean heroku:deploy -Dheroku.appName=appdev-umgc-cityapi

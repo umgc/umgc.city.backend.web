@@ -2,9 +2,9 @@ spring:
   profiles:
     active: prod
   datasource:
-    url: jdbc:postgresql://ec2-3-234-169-147.compute-1.amazonaws.com:5432/da4hsq7n5o73ko
-    username: tqhbdpgaxrvxsx
-    password: 83f4c6d22bf009a1a3c8a208ba728a9630347c5f71ff8593be4511f72b2b3a09
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/UMGCity?currentSchema=public}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 email:
   homeURL: http://localhost:4200/home
