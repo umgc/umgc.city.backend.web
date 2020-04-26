@@ -3,11 +3,11 @@ package umgc.city.team1.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -34,6 +34,7 @@ public class City implements Serializable {
     @JsonIgnore
     private CityUser cityUser;
 
+    /* Create a new city with user input */
     public City(String name, String state, CityUser cityUser){
         this.name = name;
         this.state = state;

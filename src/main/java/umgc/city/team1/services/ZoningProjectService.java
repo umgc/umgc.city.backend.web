@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import umgc.city.team1.exceptions.*;
 import umgc.city.team1.models.*;
@@ -36,6 +35,14 @@ public class ZoningProjectService {
     private DevelopmentStandardsRepository developmentStandardsRepository;
     private final AuthoritiesRepository authoritiesRepository;
     private SendGridEmailService sendGridEmailService;
+    private String notFoundStr = "not found";
+    private String municodeBaseUrl = "https://library.municode";
+    private String ch17URL = ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17";
+    private String pageIdURL = ".28OVZODI";
+
+    public ZoningProjectService(AuthoritiesRepository authoritiesRepository) {
+        this.authoritiesRepository = authoritiesRepository;
+    }
 
 
     public CityUser createUserAccount(UserAccount userAccount) throws ObjectCreationFailedException {
@@ -46,6 +53,7 @@ public class ZoningProjectService {
                     cityUserRepository.save(cityUser)));
             return cityUser;
         }catch (Exception e){
+            logger.error(e);
             throw new ObjectCreationFailedException(e);
         }
     }
@@ -65,6 +73,7 @@ public class ZoningProjectService {
                 return existingUser;
             }
         } catch (Exception e){
+            logger.error(String.valueOf(e));
             throw new CityUserNotFoundException(userAccount.getEmail());
         }
 
@@ -106,13 +115,14 @@ public class ZoningProjectService {
                 throw new CityUserNotFoundException("User Credentials Not Found!");
             }
         } catch (NullPointerException e) {
+            logger.error("User Credentials Not Found!" + e);
             throw new CityUserNotFoundException("User Credentials Not Found!");
         }
     }
 
     public Optional<City> getCityById(UUID cityId) throws CityNotFoundException {
         return Optional.of(this.cityRepository.findById(cityId))
-                .orElseThrow(() -> new CityNotFoundException("City with id " + cityId + " not found"));
+                .orElseThrow(() -> new CityNotFoundException("City with id " + cityId + " " + notFoundStr));
     }
 
     private Optional<ZoneLandUse> getZoneLandUseByDescription(String zoneLandUseDescription, UUID cityId) {
@@ -126,7 +136,7 @@ public class ZoningProjectService {
     public void createUseCase(UseCaseDto useCaseDto) throws CityNotFoundException, UseCaseNotFoundException {
         Optional<City> cityOptional = getCityById(useCaseDto.getCityId());
         if (cityOptional.isEmpty())
-            throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " not found");
+            throw new CityNotFoundException("City with id " + useCaseDto.getCityId() + " " + notFoundStr);
         City city = cityOptional.get();
 
         //Get zone by zone symbol
@@ -225,8 +235,8 @@ public class ZoningProjectService {
     public MapCase getPasadenaZoneData(MapShape mapShape) throws ZoneNotFoundException {
         MapZone baseZoneOptional =
                 Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
-                        new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " not found"));
-        MapCase mapCase = new MapCase();
+                        new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " " + notFoundStr));
+        MapCase mapCase = new MapCase(codeLabel, baseCode, overlayCode, baseCodeDescription, overlayCodeDescription, baseGeneralStandardsURL, baseAdditionalStandardsURL, baseGardenStandard, baseFrontageAndFacadesStandards, overlayGeneralStandardsURL, overlayAdditionalStandardsURL, overlayGardenStandards, overlayFrontageAndFacadesStandards);
         mapCase.setCodeLabel(mapShape.getCodeLabel());
         mapCase.setBaseCode(mapShape.getZoneCode());
         mapCase.setBaseCodeDescription(baseZoneOptional.getDescription());
@@ -239,35 +249,35 @@ public class ZoningProjectService {
             if (mapShape.getOverlayCode().equals("PK-LD")) {
                 mapCase.setOverlayCode("PK-LD");
                 mapCase.setOverlayCodeDescription("Parking and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL("https://library.municode" +
-                        ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17" +
-                        ".28OVZODI");
+                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
+                        ch17URL +
+                        pageIdURL);
             }
             if (mapShape.getOverlayCode().equals("OC-LD")) {
                 mapCase.setOverlayCode("OC-LD");
                 mapCase.setOverlayCodeDescription("Office Conversion Overlay District and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL("https://library.municode" +
-                        ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17" +
-                        ".28OVZODI");
+                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
+                        ch17URL +
+                        pageIdURL);
             }
             if (mapShape.getOverlayCode().equals("HD-LD")) {
                 mapCase.setOverlayCode("HD-LD");
                 mapCase.setOverlayCodeDescription("Hillside Development (Residential) and Landmark Overlay District");
-                mapCase.setOverlayGeneralStandardsURL("https://library.municode" +
-                        ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17" +
-                        ".28OVZODI");
+                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
+                        ch17URL +
+                        pageIdURL");
             }
             if (mapShape.getOverlayCode().equals("OC-HL-1")) {
                 mapCase.setOverlayCode("OC-HL-1");
                 mapCase.setOverlayCodeDescription("Office Conversion (Multi-family Residential) and Landmark Overlay " +
                         "District");
-                mapCase.setOverlayGeneralStandardsURL("https://library.municode" +
-                        ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17" +
-                        ".28OVZODI");
+                mapCase.setOverlayGeneralStandardsURL(municodeBaseUrl +
+                        ch17URL +
+                        pageIdURL);
             }
             MapZone overlayZoneOptional =
                     Optional.of(zoneRepository.findUseCaseByZoneSymbol(mapShape.getZoneCode())).orElseThrow(() ->
-                            new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " not found"));
+                            new ZoneNotFoundException("Zone with code: " + mapShape.getZoneCode() + " " + notFoundStr));
             mapCase.setOverlayCode(overlayZoneOptional.getZoneSymbol());
             mapCase.setOverlayCodeDescription(overlayZoneOptional.getZoneSymbol());
             mapCase.setOverlayGeneralStandardsURL(overlayZoneOptional.getGeneralStandardsURL());

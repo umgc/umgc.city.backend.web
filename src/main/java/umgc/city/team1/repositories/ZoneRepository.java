@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/* Returns data from Zone table */
 @Repository
 public interface ZoneRepository extends JpaRepository<Zone, UUID> {
     @Query("SELECT z from Zone as z where z.id = :zoneId")

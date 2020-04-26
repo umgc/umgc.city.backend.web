@@ -6,9 +6,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import umgc.city.team1.models.CityUser;
 
-import java.util.List;
 import java.util.UUID;
 
+/* Returns data from CityUser table */
 @Repository
 public interface CityUserRepository extends JpaRepository<CityUser, UUID> {
 

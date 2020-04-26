@@ -1,6 +1,6 @@
 package umgc.city.team1.utilities;
 
-public interface Constants {
+public final class Constants {
     // Email Setup
     String EMAIL_SENDER = "UMUCCityConsole_EmailBot@umcu.edu";
     String EMAIL_SENDER_NAME = "UMGC City Zoning Application Team";

@@ -22,10 +22,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
      /*Encode the raw password using PasswordEncoder */
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder(){
-       return new BCryptPasswordEncoder();
-    } */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new AbstractPasswordEncoder() {
