@@ -50,7 +50,7 @@ public class ZoningProjectController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserAccount> VerifyUserAccount(@RequestBody UserAccount userAccount) throws CityUserNotFoundException {
-        return new ResponseEntity<UserAccount>(zoningProjectService.VerifyUserAccount(userAccount), HttpStatus.OK);
+        return new ResponseEntity<>(zoningProjectService.VerifyUserAccount(userAccount), HttpStatus.OK);
     }
 
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
