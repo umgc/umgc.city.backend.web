@@ -11,4 +11,5 @@ public class MapShape {
 
     public MapShape(String shape, String id, String codeLabel, String zoneCode, String overlayCode, String coords) {
     }
+
 }

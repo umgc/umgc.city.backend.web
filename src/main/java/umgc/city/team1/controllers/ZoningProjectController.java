@@ -96,13 +96,14 @@ public class ZoningProjectController {
 
     /* Returns zones that exist in pilot DB for the city of Pasadena */
     @GetMapping(value = "/pasadena/zones", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity<MapCase> getPasadenaZoneData(@RequestBody MapShape mapShape) throws ZoneNotFoundException {
         return new ResponseEntity<>(zoningProjectService.getPasadenaZoneData(mapShape), HttpStatus.OK);
     }
 
     /* Sends user name to user.  Returns error if the user email does not exist in table. */
     @PostMapping(value = "/users/sendCredentials", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws EmailException,
+    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws
             IOException, TemplateException {
         zoningProjectService.sendAdminUserCredentialsInEmail(userAccount);
         return new ResponseEntity<>(HttpStatus.OK);
