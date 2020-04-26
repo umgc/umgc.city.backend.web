@@ -235,7 +235,7 @@ public class ZoningProjectService {
         mapCase.setBaseGardenStandard(baseZoneOptional.getGardenStandardsURL());
         mapCase.setBaseFrontageAndFacadesStandards(baseZoneOptional.getFrontageAndFacadesStandardsURL());
 
-        if (!mapShape.getOverlayCode().isEmpty()) {
+        if (mapShape.getOverlayCode() != null && !mapShape.getOverlayCode().isEmpty()) {
             if (mapShape.getOverlayCode().equals("PK-LD")) {
                 mapCase.setOverlayCode("PK-LD");
                 mapCase.setOverlayCodeDescription("Parking and Landmark Overlay District");
