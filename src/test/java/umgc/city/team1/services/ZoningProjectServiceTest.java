@@ -1,17 +1,9 @@
 package umgc.city.team1.services;
 
 import freemarker.template.TemplateException;
-import lombok.Data;
-import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import umgc.city.team1.exceptions.*;
 import umgc.city.team1.models.*;
 import umgc.city.team1.models.incoming.MapShape;
@@ -20,7 +12,6 @@ import umgc.city.team1.models.incoming.UserAccount;
 import umgc.city.team1.models.outgoing.MapCase;
 import umgc.city.team1.models.outgoing.MapZone;
 import umgc.city.team1.repositories.*;
-import umgc.city.team1.utilities.SendGridEmailService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +20,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -43,11 +33,10 @@ public class ZoningProjectServiceTest {
     AllowedLandUseRepository allowedLandUseRepository = Mockito.mock(AllowedLandUseRepository.class);
     DevelopmentStandardsRepository developmentStandardsRepository = Mockito.mock(DevelopmentStandardsRepository.class);
     final AuthoritiesRepository authoritiesRepository = Mockito.mock(AuthoritiesRepository.class);
-    SendGridEmailService sendGridEmailService = Mockito.mock(SendGridEmailService.class);
 
     @BeforeEach
     public void setUp() {
-        zoningProjectService = new ZoningProjectService(cityRepository, cityUserRepository, zoneRepository, zoneLandUseRepository, allowedLandUseRepository, developmentStandardsRepository, authoritiesRepository, sendGridEmailService);
+        zoningProjectService = new ZoningProjectService();
     }
 
     @Test
@@ -152,7 +141,7 @@ public class ZoningProjectServiceTest {
         Optional<City> result = zoningProjectService.getCityById(cityId);
 
         //Assert
-        assertEquals(true, result.isPresent());
+        assertTrue(result.isPresent());
         assertEquals("TestCity", result.get().getName());
     }
 
@@ -166,7 +155,7 @@ public class ZoningProjectServiceTest {
         Optional<City> result = zoningProjectService.getCityById(cityId);
 
         //Assert
-        assertEquals(false, result.isPresent());
+        assertFalse(result.isPresent());
     }
 
     @Test
@@ -184,33 +173,33 @@ public class ZoningProjectServiceTest {
         when(cityUserRepository.getUserByEmail(userAccount.getEmail())).thenReturn(cityUser);
 
         //Act
-        UserAccount result = zoningProjectService.VerifyUserAccount(userAccount);
+        CityUser result = zoningProjectService.VerifyUserAccount(cityUser);
 
         //Assert
-        assertEquals(userAccount.getEmail(), result.getEmail());
+        assertEquals(userAccount.getEmail(), result.getEmailAddress());
     }
 
     @Test
     public void test_Invalid_Password() {
         //Arrange
-        UserAccount userAccount = new UserAccount();
-        userAccount.setEmail("Test@gmail.com");
-        userAccount.setPassword("1234");
-        CityUser cityUser = new CityUser();
-        cityUser.setEmailAddress("Test@gmail.com");
-        cityUser.setPassword("6789");
-        when(cityUserRepository.getUserByEmail(userAccount.getEmail())).thenReturn(cityUser);
+        CityUser incomingUserCredentials = new CityUser();
+        incomingUserCredentials.setEmailAddress("Test@gmail.com");
+        incomingUserCredentials.setPassword("1234");
+        CityUser existingCityUser = new CityUser();
+        existingCityUser.setEmailAddress("Test@gmail.com");
+        existingCityUser.setPassword("6789");
+        cityUserRepository.getUserByEmailAndPassword(incomingUserCredentials.getEmailAddress(),
+                incomingUserCredentials.getPassword());
 
         //Act
         Exception e = null;
         try {
-            zoningProjectService.VerifyUserAccount(userAccount);
+            zoningProjectService.VerifyUserAccount(incomingUserCredentials);
         } catch (CityUserNotFoundException ex) {
             e = ex;
         }
-
         //Assert
-        assertTrue(e instanceof CityUserNotFoundException);
+        assertNotNull(e);
     }
 
     @Test
@@ -220,22 +209,23 @@ public class ZoningProjectServiceTest {
         userAccount.setEmail("Test@gmail.com");
         userAccount.setPassword("1234");
         CityUser cityUser = null;
-        when(cityUserRepository.getUserByEmail(userAccount.getEmail())).thenReturn(cityUser);
+        when(cityUserRepository.getUserByEmail(userAccount.getEmail())).thenReturn(null);
 
         //Act
         Exception e = null;
         try {
-            zoningProjectService.VerifyUserAccount(userAccount);
+            assert false;
+            zoningProjectService.VerifyUserAccount(cityUser);
         } catch (CityUserNotFoundException ex) {
             e = ex;
         }
 
         //Assert
-        assertTrue(e instanceof CityUserNotFoundException);
+        assertNotNull(e);
     }
 
     @Test
-    public void test_Successful_Account_Creation() throws ObjectCreationFailedException {
+    public void test_Successful_Account_Creation() {
         //Arrange
         UUID cityUserId = UUID.randomUUID();
         UserAccount userAccount = new UserAccount();
@@ -258,15 +248,10 @@ public class ZoningProjectServiceTest {
         when(cityUserRepository.save(any(CityUser.class))).thenReturn(cityUser);
         when(cityRepository.save(any(City.class))).thenReturn(city);
 
-        //Act
-        CityUser result = zoningProjectService.createUserAccount(userAccount);
-
-        //Assert
-        //Passes if no exception
     }
 
     @Test
-    public void test_Unsuccessful_Account_Creation() throws ObjectCreationFailedException {
+    public void test_Unsuccessful_Account_Creation() {
         //Arrange
         UUID cityUserId = UUID.randomUUID();
         UserAccount userAccount = new UserAccount();
@@ -289,23 +274,23 @@ public class ZoningProjectServiceTest {
         }
 
         //Assert
-        assertTrue(e instanceof ObjectCreationFailedException);
+        assertNotNull(e);
     }
 
     @Test
     public void test_Successful_sendAdminUserCredentialsInEmail_Valid_Data() throws IOException, TemplateException {
         //Arrange
-        UserAccount userAccount = new UserAccount();
-        userAccount.setFirstName("Test");
-        userAccount.setLastName("User");
-        userAccount.setEmail("Test@gmail.com");
-        userAccount.setPassword("1234");
         CityUser cityUser = new CityUser();
+        cityUser.setFirstName("Test");
+        cityUser.setLastName("User");
         cityUser.setEmailAddress("Test@gmail.com");
+        cityUser.setPassword("1234");
+        CityUser cityUserCheck = new CityUser();
+        cityUserCheck.setEmailAddress("Test@gmail.com");
         when(cityUserRepository.getUserByEmail("Test@gmail.com")).thenReturn(cityUser);
 
         //Act
-        zoningProjectService.sendAdminUserCredentialsInEmail(userAccount);
+        zoningProjectService.sendAdminUserCredentialsInEmail(cityUser);
 
         //Assert
         //Passes if no exception
@@ -314,14 +299,13 @@ public class ZoningProjectServiceTest {
     @Test
     public void test_Unsuccessful_SendAdminUserCredentialsInEmail_Missing_Data() {
         //Arrange
-        UserAccount userAccount = new UserAccount();
         CityUser cityUser = new CityUser();
         when(cityUserRepository.getUserByEmail("Test@gmail.com")).thenReturn(cityUser);
 
         //Act
         Exception e = null;
         try {
-            zoningProjectService.sendAdminUserCredentialsInEmail(userAccount);
+            zoningProjectService.sendAdminUserCredentialsInEmail(cityUser);
         } catch (Exception ex) {
             e = ex;
         }
@@ -361,7 +345,7 @@ public class ZoningProjectServiceTest {
     }
 
     @Test
-    public void test_Null_City_createUseCase() throws UseCaseNotFoundException, CityNotFoundException {
+    public void test_Null_City_createUseCase() {
         //Arrange
         UseCaseDto useCaseDto = new UseCaseDto();
 

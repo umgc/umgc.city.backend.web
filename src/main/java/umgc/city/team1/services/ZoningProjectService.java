@@ -38,10 +38,6 @@ public class ZoningProjectService {
     private DevelopmentStandardsRepository developmentStandardsRepository;
     private AuthoritiesRepository authoritiesRepository;
     private SendGridEmailService sendGridEmailService;
-    private String notFoundStr = "not found";
-    private String municodeBaseUrl = "https://library.municode";
-    private String ch17URL = ".com/ca/pasadena/codes/code_of_ordinances?nodeId=TIT17_ZONING_CODE_ART2ZODIALLAUSZOECST_CH17";
-    private String pageIdURL = ".28OVZODI";
 
     public ZoningProjectService(AuthoritiesRepository authoritiesRepository) {
         this.authoritiesRepository = authoritiesRepository;
@@ -61,26 +57,18 @@ public class ZoningProjectService {
         }
     }
 
-    public UserAccount VerifyUserAccount(UserAccount userAccount) throws CityUserNotFoundException {
-        try {
-            CityUser cityUser;
-            if (!userAccount.getEmail().isEmpty()) {
-                cityUser = cityUserRepository.getUserByEmail(userAccount.getEmail());
-                if (cityUser == null ) throw new CityUserNotFoundException(userAccount.getEmail());
-
-                if (!cityUser.getPassword().equals(userAccount.getPassword())) throw new CityUserNotFoundException(userAccount.getEmail());
-
-                UserAccount existingUser = new UserAccount();
-                existingUser.setEmail(cityUser.getEmailAddress());
-                existingUser.setCity(cityUser.getCity().getId().toString());
-                return existingUser;
-            }
-        } catch (Exception e){
-            logger.error(String.valueOf(e));
-            throw new CityUserNotFoundException(userAccount.getEmail());
+    public CityUser VerifyUserAccount(CityUser cityUser) throws CityUserNotFoundException {
+        Optional<String> emailAddressOptional = Optional.ofNullable(cityUser.getEmailAddress());
+        Optional<String> userPasswordOptional = Optional.ofNullable(cityUser.getPassword());
+        if (emailAddressOptional.isPresent() && userPasswordOptional.isPresent()) {
+            String emailAddress = emailAddressOptional.get();
+            String password = userPasswordOptional.get();
+            cityUser = Optional.of(cityUserRepository.getUserByEmailAndPassword(emailAddress,
+                    password)).orElseThrow(() -> new CityUserNotFoundException("No user found with given credentials"));
+            return cityUser;
+        } else {
+            throw new CityUserNotFoundException("Required credentials not given ");
         }
-
-        return null;
     }
 
     public List<Zone> getZonesByCityId(UUID cityId) throws ZoneNotFoundException {
@@ -98,21 +86,21 @@ public class ZoningProjectService {
                 "Land Use Cases could not be found for city with Id: " + cityId));
     }
 
-    public void sendAdminUserCredentialsInEmail(UserAccount userAccount) throws CityUserNotFoundException,
+    public void sendAdminUserCredentialsInEmail(CityUser cityUser) throws CityUserNotFoundException,
             IOException, TemplateException {
-        Optional<String> emailAddressOptional = Optional.ofNullable(userAccount.getEmail());
-        Optional<String> firstNameOptional = Optional.ofNullable(userAccount.getFirstName());
-        Optional<String> lastNameOptional = Optional.ofNullable(userAccount.getLastName());
+        Optional<String> emailAddressOptional = Optional.ofNullable(cityUser.getEmailAddress());
+        Optional<String> firstNameOptional = Optional.ofNullable(cityUser.getFirstName());
+        Optional<String> lastNameOptional = Optional.ofNullable(cityUser.getLastName());
         try {
             if (emailAddressOptional.isPresent()) {
                 String emailAddress = emailAddressOptional.get();
-                CityUser cityUser = cityUserRepository.getUserByEmail(emailAddress);
+                cityUser = cityUserRepository.getUserByEmail(emailAddress);
                 sendGridEmailService.sendEmail(cityUser);
             }
             if (firstNameOptional.isPresent() && lastNameOptional.isPresent()) {
                 String firstName = firstNameOptional.get();
                 String lastName = lastNameOptional.get();
-                CityUser cityUser = cityUserRepository.getUserByName(firstName, lastName);
+                cityUser = cityUserRepository.getUserByName(firstName, lastName);
                 sendGridEmailService.sendEmail(cityUser);
             } else {
                 throw new CityUserNotFoundException("User Credentials Not Found!");

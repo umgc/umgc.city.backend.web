@@ -9,6 +9,7 @@ import umgc.city.team1.controllers.ZoningProjectController;
 
 import java.util.UUID;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @Data

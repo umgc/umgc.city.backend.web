@@ -12,7 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class ExceptionResponse {
 
-        public ExceptionResponse(String messageInc, Date dateNowInc, String uriInc, String statusInc, String errorInc) {
-        }
+        private String message;
+        private Date timestamp;
+        private String requestedURI;
+        private String status;
+        private String error;
 }
-

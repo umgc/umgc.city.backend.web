@@ -3,9 +3,8 @@ package umgc.city.team1.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;

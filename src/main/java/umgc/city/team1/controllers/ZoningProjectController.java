@@ -50,11 +50,11 @@ public class ZoningProjectController {
     /* Verifies the user account exists */
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserAccount> VerifyUserAccount(@RequestBody UserAccount userAccount) throws CityUserNotFoundException {
-        return new ResponseEntity<>(zoningProjectService.VerifyUserAccount(userAccount), HttpStatus.OK);
+    public ResponseEntity<CityUser> VerifyUserAccount(@RequestBody CityUser cityUser) throws CityUserNotFoundException {
+        return new ResponseEntity<>(zoningProjectService.VerifyUserAccount(cityUser), HttpStatus.OK);
     }
 
-    /* Verifies the city exists with use cases */
+    /* Creates a use case linked to a user, city, zone, allowed land use, zone land use, and development standard */
     @PostMapping(value = "/usecases", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> createUseCase(@RequestBody UseCaseDto useCase) throws CityNotFoundException, UseCaseNotFoundException {
@@ -95,7 +95,8 @@ public class ZoningProjectController {
     }
 
     /* Returns zones that exist in pilot DB for the city of Pasadena */
-    @GetMapping(value = "/pasadena/zones", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/pasadena/zones", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<MapCase> getPasadenaZoneData(@RequestBody MapShape mapShape) throws ZoneNotFoundException {
         return new ResponseEntity<>(zoningProjectService.getPasadenaZoneData(mapShape), HttpStatus.OK);
@@ -103,9 +104,9 @@ public class ZoningProjectController {
 
     /* Sends user name to user.  Returns error if the user email does not exist in table. */
     @PostMapping(value = "/users/sendCredentials", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody UserAccount userAccount) throws
+    public ResponseEntity<HttpStatus> sendAccountCredentialEmail(@RequestBody CityUser cityUser) throws
             IOException, TemplateException {
-        zoningProjectService.sendAdminUserCredentialsInEmail(userAccount);
+        zoningProjectService.sendAdminUserCredentialsInEmail(cityUser);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

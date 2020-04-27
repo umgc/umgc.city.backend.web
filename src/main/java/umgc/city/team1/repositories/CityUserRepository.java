@@ -17,6 +17,9 @@ public interface CityUserRepository extends JpaRepository<CityUser, UUID> {
 
     @Query("SELECT u from CityUser as u where u.firstName = :firstName and u.lastName = :lastName")
     CityUser getUserByName(@Param ("firstName") String firstName, @Param("lastName") String lastName);
+
+    @Query("SELECT u from CityUser as u where u.emailAddress = :emailAddress and u.password = :password")
+    CityUser getUserByEmailAndPassword(@Param("emailAddress") String emailAddress, @Param("password") String password);
 }
 
 

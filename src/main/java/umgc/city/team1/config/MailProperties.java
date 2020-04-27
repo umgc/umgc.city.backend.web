@@ -8,7 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class MailProperties {
-
-    public MailProperties(String apiKey, String host, int port, String username, String homeURL, String endpoint) {
-    }
+    private String apiKey;
+    private String host;
+    private int port;
+    private String username;
+    private String homeURL;
+    private String endpoint;
 }

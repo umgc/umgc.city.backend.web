@@ -72,4 +72,7 @@ public class UserAccount implements Serializable {
     public String getState() {
         return state;
     }
+
+    public void setAuthoritiesId(UUID randomUUID) {
+    }
 }
